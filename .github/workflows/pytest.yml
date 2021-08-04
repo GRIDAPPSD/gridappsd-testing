@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       RESULTS: "gridappsd-testing_$(date +\"%Y%m%d_%H%M%S\")_${GITHUB_REF##*/}.html"
+      BRANCH_RESULTS: "gridappsd-testing_${GITHUB_REF##*/}.html"
     strategy:
       fail-fast: false
       matrix:
@@ -31,7 +32,7 @@ jobs:
         run: |
           pwd
           mkdir out
-          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html
+          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=240
           ls -l out
 
       - name: 'Archive test results'
@@ -40,11 +41,22 @@ jobs:
         with:
           aws_access_key_id: ${{ secrets.AWS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_region: ${{ secrets.AWS_REGION }}
+          aws_region: 'us-west-2'
           source: "out/${{ env.RESULTS }}"
-          dest: "s3://${{ secrets.AWS_BUCKET }}/GRIDAPPSD/gridappsd-testing/${{ env.RESULTS }}"
+          dest: "s3://gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.RESULTS }}"
+
+      - name: 'Archive branch test results'
+        if: ${{ always() }}
+        uses: prewk/s3-cp-action@v2
+        with:
+          aws_access_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_region: 'us-west-2'
+          source: "out/${{ env.RESULTS }}"
+          dest: "s3://gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.BRANCH_RESULTS }}"
 
       - name: 'Test Report'
         if: ${{ always() }}
         run: |
           echo "https://s3-us-west-2.amazonaws.com/gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.RESULTS }}"
+          echo "https://s3-us-west-2.amazonaws.com/gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.BRANCH_RESULTS }}"
