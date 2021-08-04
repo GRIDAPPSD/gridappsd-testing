@@ -36,6 +36,7 @@ jobs:
           ls -l out
 
       - name: Test
+        if: ${{ always() }}
         run: |
           pwd
           ls -lR out
