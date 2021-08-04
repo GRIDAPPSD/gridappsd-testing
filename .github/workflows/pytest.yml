@@ -1,0 +1,40 @@
+name: Run All Pytests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+  runs-on: ubuntu-18.04
+  strategy:
+    fail-fast: false
+    matrix:
+      python-version [3.6.10]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Integration Tests
+        env:
+          GRIDAPPSD_USER: ${{ secrets.GRIDAPPSD_USER }}
+          GRIDAPPSD_PASSWORD: ${{ secrets.GRIDAPPSD_PASSWORD }}
+        run: |
+          mkdir out
+          pytest -rA --html=out/gridappsd-testing_$(date +"%Y%m%d_%H%M%S")_${BRANCH}.html --self-contained-html
+
+      - name: Archive test results
+        uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_bucket: ${{ secrets.AWS_BUCKET }}
+          source_dir: out
+          destination_dir: GRIDAPPSD/gridappsd-testing
