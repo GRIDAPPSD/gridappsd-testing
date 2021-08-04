@@ -5,16 +5,19 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-18.04
-    env:
-      RESULTS: "gridappsd-testing_$(date +\"%Y%m%d_%H%M%S\")_${GITHUB_REF##*/}.html"
-      BRANCH_RESULTS: "gridappsd-testing_${GITHUB_REF##*/}.html"
     strategy:
       fail-fast: false
       matrix:
         python-version: [3.6.10]
     
     steps:
+      - name: Set values
+        run: |
+          echo "RESULTS=gridappsd-testing_$(date +\"%Y%m%d_%H%M%S\")_${GITHUB_REF##*/}.html" >> $GITHUB_ENV
+          echo "BRANCH_RESULTS="gridappsd-testing_${GITHUB_REF##*/}.html" >> $GITHUB_ENV
+
       - uses: actions/checkout@v2
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
