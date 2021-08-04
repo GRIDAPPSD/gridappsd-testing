@@ -14,7 +14,7 @@ jobs:
       - name: Set values
         run: |
           echo "RESULTS=gridappsd-testing_$(date +\"%Y%m%d_%H%M%S\")_${GITHUB_REF##*/}.html" >> $GITHUB_ENV
-          echo "BRANCH_RESULTS="gridappsd-testing_${GITHUB_REF##*/}.html" >> $GITHUB_ENV
+          echo "BRANCH_RESULTS=gridappsd-testing_${GITHUB_REF##*/}.html" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
 
