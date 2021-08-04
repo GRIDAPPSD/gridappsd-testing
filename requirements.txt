@@ -1,4 +1,5 @@
 # enter requirements that aren't related to connecting to the messagebus here
+stomp.py==6.0.0
 git+https://github.com/GRIDAPPSD/gridappsd-python.git@develop#egg=gridappsd
 pytest
 docker
