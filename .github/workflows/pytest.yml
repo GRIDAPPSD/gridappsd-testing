@@ -32,10 +32,15 @@ jobs:
         run: |
           pwd
           mkdir out
-          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=240
+          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=240 test_logging_api.py
           ls -l out
 
-      - name: 'Archive test results'
+      - name: Test
+        run: |
+          pwd
+          ls -lR out
+
+      - name: Archive test results
         if: ${{ always() }}
         uses: prewk/s3-cp-action@v2
         with:
@@ -45,7 +50,7 @@ jobs:
           source: "out/${{ env.RESULTS }}"
           dest: "s3://gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.RESULTS }}"
 
-      - name: 'Archive branch test results'
+      - name: Archive branch test results
         if: ${{ always() }}
         uses: prewk/s3-cp-action@v2
         with:
@@ -55,7 +60,7 @@ jobs:
           source: "out/${{ env.RESULTS }}"
           dest: "s3://gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.BRANCH_RESULTS }}"
 
-      - name: 'Test Report'
+      - name: Test Reports
         if: ${{ always() }}
         run: |
           echo "https://s3-us-west-2.amazonaws.com/gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.RESULTS }}"
