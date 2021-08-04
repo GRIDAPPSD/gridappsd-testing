@@ -11,7 +11,7 @@ jobs:
         python-version: [3.6.10]
     
     steps:
-      - name: Set values
+      - name: Set static enviornment values
         run: |
           echo "RESULTS=gridappsd-testing_$(date +\"%Y%m%d_%H%M%S\")_${GITHUB_REF##*/}.html" >> $GITHUB_ENV
           echo "BRANCH_RESULTS=gridappsd-testing_${GITHUB_REF##*/}.html" >> $GITHUB_ENV
@@ -33,16 +33,8 @@ jobs:
           GRIDAPPSD_USER: ${{ secrets.GRIDAPPSD_USER }}
           GRIDAPPSD_PASSWORD: ${{ secrets.GRIDAPPSD_PASSWORD }}
         run: |
-          pwd
           mkdir out
-          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=240 test_logging_api.py
-          ls -l out
-
-      - name: Test
-        if: ${{ always() }}
-        run: |
-          pwd
-          ls -lR out
+          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=2700
 
       - name: Archive test results
         if: ${{ always() }}
