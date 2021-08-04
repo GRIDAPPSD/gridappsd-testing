@@ -29,8 +29,10 @@ jobs:
           GRIDAPPSD_USER: ${{ secrets.GRIDAPPSD_USER }}
           GRIDAPPSD_PASSWORD: ${{ secrets.GRIDAPPSD_PASSWORD }}
         run: |
+          pwd
           mkdir out
-          pytest -rA --html=out/${{ env.RESULTS }}" --self-contained-html
+          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html
+          ls -l out
 
       - name: 'Archive test results'
         if: ${{ always() }}
