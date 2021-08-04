@@ -31,6 +31,7 @@ jobs:
           pytest -rA --html=out/gridappsd-testing_$(date +"%Y%m%d_%H%M%S")_${BRANCH}.html --self-contained-html
 
       - name: Archive test results
+        if: ${{ always() }}
         uses: shallwefootball/s3-upload-action@master
         with:
           aws_key_id: ${{ secrets.AWS_KEY_ID }}
