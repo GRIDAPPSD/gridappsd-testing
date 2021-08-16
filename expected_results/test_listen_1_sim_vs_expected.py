@@ -73,12 +73,48 @@ def test():
 
     finished=False
     while not finished:
-        time.sleep(65)
+        time.sleep(75)
         finished = True
     error_count = sl._error_count
     print(error_count)
     logging.info("Error count " + str(error_count))
-    assert error_count == 7, f" For expected_vs_running expecting 7 non matching results. Received {error_count}"
+    assert error_count == 17, f" For expected_vs_running expecting 12 non matching results. Received {error_count}"
 
 if __name__ == "__main__":
     test()
+
+    # {'status': 'start'}
+    # {'object': '_0044ae64-1c72-4e81-b412-d7349ce267d3', 'attribute': 'magnitude', 'indexOne': 1248156002, 'indexTwo': 1248156002, 'simulationTimestamp': 0, 'expected': '374545.4981119089', 'actual': '54911.42414314939', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # {'object': '_000b01a1-8238-4372-95c0-82aad26ea311', 'attribute': 'angle', 'indexOne': 1248156002, 'indexTwo': 1248156002, 'simulationTimestamp': 0, 'expected': '-5.066423674487563', 'actual': '21.91525592241816', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # {'object': '_000b01a1-8238-4372-95c0-82aad26ea311', 'attribute': 'magnitude', 'indexOne': 1248156002, 'indexTwo': 1248156002, 'simulationTimestamp': 0, 'expected': '2388.676720682955', 'actual': '23182.721945577698', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '0da4890f-1eb5-4ef2-81e7-97ac4b15d191', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_CABBC3A1-66F5-4B9C-ACB9-476E2389D119', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '0da4890f-1eb5-4ef2-81e7-97ac4b15d191', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_D6C44FF1-BC60-49D3-9438-DFAD1AED0A28', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '0da4890f-1eb5-4ef2-81e7-97ac4b15d191', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_3DE55D2D-34D3-487E-9D6E-3A4DB1E38E47', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '0da4890f-1eb5-4ef2-81e7-97ac4b15d191', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156016, 'indexTwo': 1248156016, 'simulationTimestamp': 0, 'expected': '1.0', 'actual': 'NA', 'diffMrid': '1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '0.0', 'actual': '1', 'diffMrid': '3cf5c2fd-9bd1-4636-80d0-00d6a16d2318', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_only_in_expected_MRID_time_does_not_matches', 'attribute': 'value', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '0.0', 'actual': 'NA', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '1.0', 'actual': '0', 'diffMrid': '3cf5c2fd-9bd1-4636-80d0-00d6a16d2318', 'diffType': 'REVERSE', 'match': False}
+    # {'object': '_only_in_expected_MRID_time_does_not_matches', 'attribute': 'value', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '1.0', 'actual': 'NA', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # {'status': 'finish'}
+
+    ## Added reverse
+    # {'status': 'start'}
+    # {'object': '_0044ae64-1c72-4e81-b412-d7349ce267d3', 'attribute': 'magnitude', 'indexOne': 1248156002, 'indexTwo': 1248156002, 'simulationTimestamp': 0, 'expected': '374545.4981119089', 'actual': '54911.42414314939', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # {'object': '_000b01a1-8238-4372-95c0-82aad26ea311', 'attribute': 'angle', 'indexOne': 1248156002, 'indexTwo': 1248156002, 'simulationTimestamp': 0, 'expected': '-5.066423674487563', 'actual': '21.91525592241816', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # {'object': '_000b01a1-8238-4372-95c0-82aad26ea311', 'attribute': 'magnitude', 'indexOne': 1248156002, 'indexTwo': 1248156002, 'simulationTimestamp': 0, 'expected': '2388.676720682955', 'actual': '23182.721945577698', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': 'a20d42c1-022f-4338-b25c-67a415803c95', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_CABBC3A1-66F5-4B9C-ACB9-476E2389D119', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': 'a20d42c1-022f-4338-b25c-67a415803c95', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_D6C44FF1-BC60-49D3-9438-DFAD1AED0A28', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': 'a20d42c1-022f-4338-b25c-67a415803c95', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_3DE55D2D-34D3-487E-9D6E-3A4DB1E38E47', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': 'a20d42c1-022f-4338-b25c-67a415803c95', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '1', 'diffMrid': 'a20d42c1-022f-4338-b25c-67a415803c95', 'diffType': 'REVERSE', 'match': False}
+    # {'object': '_CABBC3A1-66F5-4B9C-ACB9-476E2389D119', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '1', 'diffMrid': 'a20d42c1-022f-4338-b25c-67a415803c95', 'diffType': 'REVERSE', 'match': False}
+    # {'object': '_D6C44FF1-BC60-49D3-9438-DFAD1AED0A28', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '1', 'diffMrid': 'a20d42c1-022f-4338-b25c-67a415803c95', 'diffType': 'REVERSE', 'match': False}
+    # {'object': '_3DE55D2D-34D3-487E-9D6E-3A4DB1E38E47', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '1', 'diffMrid': 'a20d42c1-022f-4338-b25c-67a415803c95', 'diffType': 'REVERSE', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156016, 'indexTwo': 1248156016, 'simulationTimestamp': 0, 'expected': '1.0', 'actual': 'NA', 'diffMrid': '1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156016, 'indexTwo': 1248156016, 'simulationTimestamp': 0, 'expected': '0.0', 'actual': 'NA', 'diffMrid': '1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4', 'diffType': 'REVERSE', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '0.0', 'actual': '1', 'diffMrid': '6842fe8e-555b-464f-a52a-4c03783ae46a', 'diffType': 'FORWARD', 'match': False}
+    # {'object': '_only_in_expected_MRID_time_does_not_matches', 'attribute': 'value', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '0.0', 'actual': 'NA', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '1.0', 'actual': '0', 'diffMrid': '6842fe8e-555b-464f-a52a-4c03783ae46a', 'diffType': 'REVERSE', 'match': False}
+    # {'object': '_only_in_expected_MRID_time_does_not_matches', 'attribute': 'value', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '1.0', 'actual': 'NA', 'diffMrid': 'NA', 'diffType': 'NA', 'match': False}
+    # 17

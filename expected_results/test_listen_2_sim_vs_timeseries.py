@@ -6,6 +6,7 @@ import logging
 
 from gridappsd import GridAPPSD, DifferenceBuilder, utils
 from gridappsd.topics import simulation_input_topic, simulation_output_topic, simulation_log_topic, simulation_output_topic
+import request_test_running
 import request_test_running_vs_timeseries
 test_output_topic = "/topic/goss.gridappsd.simulation.test.output."
 logging.basicConfig(filename=__name__+'.log', level=logging.INFO)
@@ -51,22 +52,16 @@ class SimpleListener(object):
 
 
 def test():
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("-test_id", default=3258685887,
-    #                     help="Simulation id to use for responses on the message bus.")
-    #
-    # opts = parser.parse_args()
-
-    with open('test_id_request_1.json') as f:
-        sim_id = json.load(f)
-    sim_id = sim_id['sim_id1']
-    # sim_id = 877159920
-    sim_id2, test_id2 = request_test_running_vs_timeseries.start_test(sim_id)
+    sim_id = request_test_running.start_test('sample_app')
+    time.sleep(90)
+    print('sent run request ' + sim_id)
+    with open('test_id_request_2.json', 'w') as f:
+        json.dump({'sim_id1': sim_id}, f)
+    # sim_id = 476685412 # 68942381
+    sim_id2, test_id2 = request_test_running_vs_timeseries.start_test(sim_id, 'sample_app', duration='60')
     print('simid ' + sim_id2)
     print('sent test request ' + test_id2)
 
-    # gapps = GridAPPSD(opts.test_id, address=utils.get_gridappsd_address(),
-                      # username=utils.get_gridappsd_user(), password=utils.get_gridappsd_pass())
     gapps = GridAPPSD()
     gapps.connect()
     sl = SimpleListener(gapps, 1)
@@ -75,12 +70,9 @@ def test():
     print('response')
     print(response)
 
-    with open('test_id_request_2.json', 'w') as f:
-        json.dump({'sim_id2': sim_id2}, f)
-
     finished = False
     while not finished:
-        time.sleep(65)
+        time.sleep(120)
         finished = True
     error_count = sl._error_count
     print(error_count)
@@ -90,4 +82,3 @@ def test():
 
 if __name__ == "__main__":
     test()
-

@@ -10,7 +10,7 @@ test_topic = 'goss.gridappsd.test'
 responseQueueTopic = '/temp-queue/response-queue'
 goss_simulation_status_topic = '/topic/goss.gridappsd/simulation/status/'
 
-def start_test(simulationID):
+def start_test(simulationID, app_name ='sample_app', start_time='1248156000',duration='60',feeder_name='_C1C3E687-6FFD-C753-582B-632A27E28507'):
     events = [{
         "message": {
             "forward_differences": [
@@ -35,8 +35,10 @@ def start_test(simulationID):
 
     test_id = str(random.getrandbits(32))
     testCfgAll = {
-               "appId": "sample_app",
-               "testId": test_id
+               "appId": app_name,
+               "testId": test_id,
+               "testOutput": False,
+               "interval": 10
                }
 
     # # testCfgAll['events'] = events
@@ -58,11 +60,12 @@ def start_test(simulationID):
                                           "simulation_broker_port": 52798, "simulation_broker_location": "127.0.0.1"},
                     "application_config": {"applications": [{"name": "sample_app", "config_string": ""}]},
                     "simulation_request_type": "NEW"}
-    req_template['simulation_config']['duration'] = 60
-    req_template['power_system_config']['Line_name'] = '_C1C3E687-6FFD-C753-582B-632A27E28507'  # IEEE 123
+    req_template['simulation_config']['start_time'] = start_time
+    req_template['simulation_config']['duration'] = duration
+    req_template['power_system_config']['Line_name'] = feeder_name # '_C1C3E687-6FFD-C753-582B-632A27E28507'  # IEEE 123
     # req_template['power_system_config']['Line_name'] = '_AAE94E4A-2465-6F5E-37B1-3E72183A4E44'  # test9500new
 
-    req_template["application_config"]["applications"][0]['name'] = 'sample_app'
+    req_template["application_config"]["applications"][0]['name'] = app_name
     # req_template["application_config"]["applications"][0]['name'] = 'sample_app_opp'
 
     req_template['test_config'] = testCfgAll
@@ -82,6 +85,18 @@ def start_test(simulationID):
     print('simulation id ', simulationId)
 
     return(simulationId['simulationId'],test_id)
+
+# {'status': 'start'}
+# {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '32583055-fb4e-41bc-9e7f-e40dcc327010', 'diffType': 'FORWARD', 'match': False}
+# {'object': '_CABBC3A1-66F5-4B9C-ACB9-476E2389D119', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '32583055-fb4e-41bc-9e7f-e40dcc327010', 'diffType': 'FORWARD', 'match': False}
+# {'object': '_D6C44FF1-BC60-49D3-9438-DFAD1AED0A28', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '32583055-fb4e-41bc-9e7f-e40dcc327010', 'diffType': 'FORWARD', 'match': False}
+# {'object': '_3DE55D2D-34D3-487E-9D6E-3A4DB1E38E47', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156014, 'indexTwo': 1248156014, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '32583055-fb4e-41bc-9e7f-e40dcc327010', 'diffType': 'FORWARD', 'match': False}
+# {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '0.0', 'actual': '1', 'diffMrid': '4f93d9f5-7695-4c1e-80bd-b391462e041d', 'diffType': 'FORWARD', 'match': False}
+# {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156029, 'indexTwo': 1248156029, 'simulationTimestamp': 0, 'expected': '1.0', 'actual': '0', 'diffMrid': '4f93d9f5-7695-4c1e-80bd-b391462e041d', 'diffType': 'REVERSE', 'match': False}
+# {'object': '_939CA567-AA3D-4972-AABC-1D0AAF4859FE', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156044, 'indexTwo': 1248156044, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '94dc5ecd-3aa0-49cb-91be-93c81eca1726', 'diffType': 'FORWARD', 'match': False}
+# {'object': '_CABBC3A1-66F5-4B9C-ACB9-476E2389D119', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156044, 'indexTwo': 1248156044, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '94dc5ecd-3aa0-49cb-91be-93c81eca1726', 'diffType': 'FORWARD', 'match': False}
+# {'object': '_D6C44FF1-BC60-49D3-9438-DFAD1AED0A28', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156044, 'indexTwo': 1248156044, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '94dc5ecd-3aa0-49cb-91be-93c81eca1726', 'diffType': 'FORWARD', 'match': False}
+# {'object': '_3DE55D2D-34D3-487E-9D6E-3A4DB1E38E47', 'attribute': 'ShuntCompensator.sections', 'indexOne': 1248156044, 'indexTwo': 1248156044, 'simulationTimestamp': 0, 'expected': 'NA', 'actual': '0', 'diffMrid': '94dc5ecd-3aa0-49cb-91be-93c81eca1726', 'diffType': 'FORWARD', 'match': False}
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

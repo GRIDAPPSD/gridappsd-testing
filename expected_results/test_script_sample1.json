@@ -9,7 +9,7 @@
           "timestamp": 1535574871,
           "measurements": [
             {
-              "measurement_mrid": "_007d97d4-4b30-4635-8122-8e7f1e7cf3be",
+              "measurement_mrid": "_0055de94-7d7e-4931-a884-cab596cc191b",
               "angle": -5.066423674487563,
               "magnitude": 235525.8716877966,
               "simulation_id": "1961648576",
@@ -23,7 +23,7 @@
               "time": 1248156002
             },
             {
-              "measurement_mrid": "_01204a90-9893-4e57-8ea5-0a09198e58fe",
+              "measurement_mrid": "_0058123f-da11-4f7c-a429-e47e5949465f",
               "angle": 28.940770423235723,
               "magnitude": 374545.4981119089,
               "simulation_id": "1961648576",
@@ -46,7 +46,7 @@
               "time": 1587670650,
               "attribute": "ShuntCompensator.sections",
               "value": 1.0,
-              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"
+              "object": "_232DD3A8-9A3C-4053-B972-8A5EB49FD980"
             },
             {
               "hasMeasurementDifference": "REVERSE",
@@ -55,7 +55,7 @@
               "time": 1587670650,
               "attribute": "ShuntCompensator.sections",
               "value": 0.0,
-              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"
+              "object": "_232DD3A8-9A3C-4053-B972-8A5EB49FD980"
             }
           ]
         }
@@ -72,7 +72,7 @@
               "time": 1587670665,
               "attribute": "ShuntCompensator.sections",
               "value": 0.0,
-              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"
+              "object": "_232DD3A8-9A3C-4053-B972-8A5EB49FD980"
             },
             {
               "hasMeasurementDifference": "REVERSE",
@@ -81,7 +81,7 @@
               "time": 1587670665,
               "attribute": "ShuntCompensator.sections",
               "value": 1.0,
-              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"
+              "object": "_232DD3A8-9A3C-4053-B972-8A5EB49FD980"
             }
           ]
         }
@@ -98,7 +98,7 @@
               "time": 1587670665,
               "attribute": "ShuntCompensator.sections",
               "value": 0.0,
-              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"
+              "object": "_232DD3A8-9A3C-4053-B972-8A5EB49FD980"
             },
             {
               "hasMeasurementDifference": "REVERSE",
@@ -107,7 +107,7 @@
               "time": 1587670665,
               "attribute": "ShuntCompensator.sections",
               "value": 1.0,
-              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"
+              "object": "_232DD3A8-9A3C-4053-B972-8A5EB49FD980"
             }
           ]
         }
@@ -124,7 +124,7 @@
               "time": 1587670665,
               "attribute": "ShuntCompensator.sections",
               "value": 0.0,
-              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"
+              "object": "_232DD3A8-9A3C-4053-B972-8A5EB49FD980"
             },
             {
               "hasMeasurementDifference": "REVERSE",
@@ -133,7 +133,7 @@
               "time": 1587670665,
               "attribute": "ShuntCompensator.sections",
               "value": 1.0,
-              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"
+              "object": "_232DD3A8-9A3C-4053-B972-8A5EB49FD980"
             }
           ]
         }

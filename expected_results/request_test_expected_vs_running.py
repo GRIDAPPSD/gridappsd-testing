@@ -9,8 +9,7 @@ test_topic = 'goss.gridappsd.test'
 responseQueueTopic = '/temp-queue/response-queue'
 goss_simulation_status_topic = '/topic/goss.gridappsd/simulation/status/'
 
-# def _startTest(username,password,gossServer='localhost',stompPort='61613', simulationID=1234, rulePort=5000, topic="input"):
-def start_test():
+def start_test(app_name='sample_app',start_time='1248156000',duration='60',feeder_name='_C1C3E687-6FFD-C753-582B-632A27E28507',expected_file="expected_result_series_filtered_123_normal_small_4.json"):
     loc = os.path.realpath(__file__)
     loc = os.path.dirname(loc)
     print(loc)
@@ -44,7 +43,7 @@ def start_test():
                }
 
     # with open("expected_result_series_filtered_9500.json") as f:
-    with open(os.path.join(loc, "expected_result_series_filtered_123_normal_small_4.json")) as f:
+    with open(os.path.join(loc, expected_file)) as f:
         expectedJson = json.load(f)
 
     testCfgAll['expectedResults'] = expectedJson['expectedResults']
@@ -53,13 +52,16 @@ def start_test():
     # testCfgAll['events'] = events
 
     req_template = {"power_system_config":{"SubGeographicalRegion_name":"_1CD7D2EE-3C91-3248-5662-A43EFEFAC224","GeographicalRegion_name":"_24809814-4EC6-29D2-B509-7F8BFB646437","Line_name":"_C1C3E687-6FFD-C753-582B-632A27E28507"},"simulation_config":{"power_flow_solver_method":"NR","duration":120,"simulation_name":"ieee123","simulator":"GridLAB-D","start_time":1248156000,"run_realtime":True,"simulation_output":{},"model_creation_config":{"load_scaling_factor":1.0,"triplex":"y","encoding":"u","system_frequency":60,"voltage_multiplier":1.0,"power_unit_conversion":1.0,"unique_names":"y","schedule_name":"ieeezipload","z_fraction":0.0,"i_fraction":1.0,"p_fraction":0.0,"randomize_zipload_fractions":False,"use_houses":False},"simulation_broker_port":52798,"simulation_broker_location":"127.0.0.1"},"application_config":{"applications":[{"name":"sample_app","config_string":""}]},"simulation_request_type":"NEW"}
-    req_template['simulation_config']['duration'] = 60
-    req_template['power_system_config']['Line_name'] = '_C1C3E687-6FFD-C753-582B-632A27E28507'  # IEEE 123
+    req_template['simulation_config']['start_time'] = start_time
+    req_template['simulation_config']['duration'] = duration
+    req_template['power_system_config']['Line_name'] = feeder_name #'_C1C3E687-6FFD-C753-582B-632A27E28507'  # IEEE 123
     # req_template['power_system_config']['Line_name'] = '_AAE94E4A-2465-6F5E-37B1-3E72183A4E44'  # test9500new
 
-    req_template["application_config"]["applications"][0]['name'] = 'sample_app'
+    req_template["application_config"]["applications"][0]['name'] = app_name
     # req_template["application_config"]["applications"][0]['name'] = 'sample_app_opp'
 
+    testCfgAll['start_time'] = req_template['simulation_config']['start_time']
+    testCfgAll['duration'] = req_template['simulation_config']['duration']
     req_template['test_config'] = testCfgAll
 
     simCfg13pv = json.dumps(req_template)
@@ -86,8 +88,4 @@ if __name__ == "__main__":
     # parser.add_argument('-o', '--options', type=str, default='{}')
     args = parser.parse_args()
 
-    # _startTest('system','manager',gossServer='127.0.0.1',stompPort='61613', simulationID=args.id, rulePort=args.port, topic=args.topic)
     start_test()
-
-
- # python /usr/src/gridappsd-sample/sample_app/runsample.py 1201658254 {"power_system_config":{"SubGeographicalRegion_name":"_1CD7D2EE-3C91-3248-5662-A43EFEFAC224","GeographicalRegion_name":"_24809814-4EC6-29D2-B509-7F8BFB646437","Line_name":"_C1C3E687-6FFD-C753-582B-632A27E28507"},"simulation_config":{"power_flow_solver_method":"NR","duration":120,"simulation_name":"ieee123","simulator":"GridLAB-D","start_time":1248156000,"run_realtime":true,"simulation_output":{},"model_creation_config":{"load_scaling_factor":1.0,"triplex":"y","encoding":"u","system_frequency":60,"voltage_multiplier":1.0,"power_unit_conversion":1.0,"unique_names":"y","schedule_name":"ieeezipload","z_fraction":0.0,"i_fraction":1.0,"p_fraction":0.0,"randomize_zipload_fractions":false,"use_houses":false},"simulation_broker_port":52798,"simulation_broker_location":"127.0.0.1"},"application_config":{"applications":[{"name":"sample_app","config_string":""}]},"simulation_request_type":"NEW"}

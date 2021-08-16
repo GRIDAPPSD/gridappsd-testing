@@ -4,7 +4,7 @@
       "1248156002": {
         "simulation_id": "559402036",
           "message": {
-            "timestamp": 1535574871,
+            "timestamp": 1248156002,
             "measurements": [
               {
                 "measurement_mrid": "_000b01a1-8238-4372-95c0-82aad26ea311",
@@ -29,22 +29,22 @@
         }
       },
     "input": {
-      "1248156014": {
+      "1248156016": {
         "simulation_id": "559402036",
         "message": {
-          "timestamp": 1248156014,
+          "timestamp": 1248156016,
           "measurements": [
             {"hasMeasurementDifference": "FORWARD",
               "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
               "simulation_id": "1961648576",
-              "time": 1248156014,
+              "time": 1248156016,
               "attribute": "ShuntCompensator.sections",
               "value": 1.0,
               "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"},
              {"hasMeasurementDifference": "REVERSE",
               "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
               "simulation_id": "1961648576",
-              "time": 1248156014,
+              "time": 1248156016,
               "attribute": "ShuntCompensator.sections",
               "value": 0.0,
               "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"}
@@ -69,10 +69,25 @@
               "time": 1248156029,
               "attribute": "ShuntCompensator.sections",
               "value": 1.0,
-              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"}
+              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"},
+            {"hasMeasurementDifference": "FORWARD",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156029,
+              "attribute": "ShuntCompensator.sections",
+              "value": 0.0,
+              "object": "_only_in_expected_MRID_time_does_not_matches"},
+             {"hasMeasurementDifference": "REVERSE",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156029,
+              "attribute": "ShuntCompensator.sections",
+              "value": 1.0,
+              "object": "_only_in_expected_MRID_time_does_not_matches"}
           ]
         }
       },
+
       "27": {
         "simulation_id": "559402036",
         "message": {
