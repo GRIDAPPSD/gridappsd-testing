@@ -38,7 +38,7 @@ jobs:
           GRIDAPPSD_PASSWORD: ${{ secrets.GRIDAPPSD_PASSWORD }}
         run: |
           mkdir out
-          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=2700
+          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=2700 test_docker_integration.py
 
       - name: Archive test results
         if: ${{ always() }}
