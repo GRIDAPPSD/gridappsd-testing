@@ -40,20 +40,6 @@
                 {
                     "feeder_name": {
                         "type": "literal",
-                        "value": "ieee123"
-                    },
-                    "region_name": {
-                        "type": "literal",
-                        "value": "IEEE"
-                    },
-                    "subregion_name": {
-                        "type": "literal",
-                        "value": "Medium"
-                    }
-                },
-                {
-                    "feeder_name": {
-                        "type": "literal",
                         "value": "ieee123pv"
                     },
                     "region_name": {
@@ -68,7 +54,7 @@
                 {
                     "feeder_name": {
                         "type": "literal",
-                        "value": "ieee13nodeckt"
+                        "value": "ieee123"
                     },
                     "region_name": {
                         "type": "literal",
@@ -76,7 +62,7 @@
                     },
                     "subregion_name": {
                         "type": "literal",
-                        "value": "Small"
+                        "value": "Medium"
                     }
                 },
                 {
@@ -96,6 +82,48 @@
                 {
                     "feeder_name": {
                         "type": "literal",
+                        "value": "ieee13nodeckt"
+                    },
+                    "region_name": {
+                        "type": "literal",
+                        "value": "IEEE"
+                    },
+                    "subregion_name": {
+                        "type": "literal",
+                        "value": "Small"
+                    }
+                },
+                {
+                    "feeder_name": {
+                        "type": "literal",
+                        "value": "ieee13ochre"
+                    },
+                    "region_name": {
+                        "type": "literal",
+                        "value": "IEEE"
+                    },
+                    "subregion_name": {
+                        "type": "literal",
+                        "value": "Small"
+                    }
+                },
+                {
+                    "feeder_name": {
+                        "type": "literal",
+                        "value": "test9500new"
+                    },
+                    "region_name": {
+                        "type": "literal",
+                        "value": "IEEE"
+                    },
+                    "subregion_name": {
+                        "type": "literal",
+                        "value": "Large"
+                    }
+                },
+                {
+                    "feeder_name": {
+                        "type": "literal",
                         "value": "ieee8500"
                     },
                     "region_name": {
@@ -110,7 +138,7 @@
                 {
                     "feeder_name": {
                         "type": "literal",
-                        "value": "test9500new"
+                        "value": "final9500node"
                     },
                     "region_name": {
                         "type": "literal",
@@ -152,6 +180,6 @@
             ]
         }
     },
-    "id": "2126488164",
+    "id": "504795932",
     "responseComplete": true
 }

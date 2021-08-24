@@ -12,6 +12,16 @@
                 "subRegionName": "Fairbanks"
             },
             {
+                "modelId": "_EE71F6C9-56F0-4167-A14E-7F4C71F10EAA",
+                "modelName": "final9500node",
+                "regionId": "_73C512BD-7249-4F50-50DA-D93849B89C43",
+                "regionName": "IEEE",
+                "stationId": "_4AE25EA5-C364-43BB-BD7D-C8E870EE8F5D",
+                "stationName": "ThreeSubs",
+                "subRegionId": "_A1170111-942A-6ABD-D325-C64886DC4D7D",
+                "subRegionName": "Large"
+            },
+            {
                 "modelId": "_C1C3E687-6FFD-C753-582B-632A27E28507",
                 "modelName": "ieee123",
                 "regionId": "_73C512BD-7249-4F50-50DA-D93849B89C43",
@@ -62,6 +72,16 @@
                 "subRegionName": "Small"
             },
             {
+                "modelId": "_13AD8E07-3BF9-A4E2-CB8F-C3722F837B62",
+                "modelName": "ieee13ochre",
+                "regionId": "_73C512BD-7249-4F50-50DA-D93849B89C43",
+                "regionName": "IEEE",
+                "stationId": "_6C62C905-6FC7-653D-9F1E-1340F974A587",
+                "stationName": "IEEE13",
+                "subRegionId": "_ABEB635F-729D-24BF-B8A4-E2EF268D8B9E",
+                "subRegionName": "Small"
+            },
+            {
                 "modelId": "_4F76A5F9-271D-9EB8-5E31-AA362D86F2C3",
                 "modelName": "ieee8500",
                 "regionId": "_73C512BD-7249-4F50-50DA-D93849B89C43",
@@ -103,6 +123,6 @@
             }
         ]
     },
-    "id": "1042047246",
+    "id": "1536028212",
     "responseComplete": true
 }

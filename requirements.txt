@@ -7,3 +7,4 @@ mock
 pytest-html
 pytest-timeout
 dictdiffer 
+deepdiff
