@@ -62,7 +62,9 @@ def test():
     print('simid ' + sim_id2)
     print('sent test request ' + test_id2)
 
-    gapps = GridAPPSD()
+    username = "app_user"
+    password = "1234App"
+    gapps = GridAPPSD(username=username, password=password)
     gapps.connect()
     sl = SimpleListener(gapps, 1)
     print(test_output_topic+str(test_id2))

@@ -2,7 +2,7 @@ import json
 import time
 import os
 import argparse
-from gridappsd import GOSS
+from gridappsd import GridAPPSD
 import random
 
 goss_sim = "goss.gridappsd.process.request.simulation"
@@ -70,8 +70,10 @@ def start_test(simulationID, app_name ='sample_app', start_time='1248156000',dur
 
     req_template['test_config'] = testCfgAll
 
-    goss = GOSS()
-    goss.connect()
+    username = "app_user"
+    password = "1234App"
+    gapps = GridAPPSD(username=username, password=password)
+    gapps.connect()
 
     req_template['test_config']['compareWithSimId'] = simulationID # 913015800
     req_template['test_config']['testType'] ='simulation_vs_timeseries'
@@ -80,7 +82,7 @@ def start_test(simulationID, app_name ='sample_app', start_time='1248156000',dur
     print('request')
     print(json.dumps(req_template,indent=2))
 
-    simulationId = goss.get_response(goss_sim, simCfg13pv, timeout=10)
+    simulationId = gapps.get_response(goss_sim, simCfg13pv, timeout=10)
     print('sent simulation request')
     print('simulation id ', simulationId)
 

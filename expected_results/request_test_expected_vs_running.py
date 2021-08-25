@@ -69,7 +69,9 @@ def start_test(app_name='sample_app',start_time='1248156000',duration='60',feede
     print("request")
     print(json.dumps(req_template,indent=2))
     # exit(0)
-    goss = GOSS()
+    username = "app_user"
+    password = "1234App"
+    goss = GOSS(username=username, password=password)
     goss.connect()
 
     simulationId = goss.get_response(goss_sim, simCfg13pv, timeout=10)

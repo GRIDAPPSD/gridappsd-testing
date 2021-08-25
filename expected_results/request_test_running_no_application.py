@@ -3,7 +3,7 @@ import time
 import os
 import argparse
 # import goss_forward_sim
-from gridappsd import GOSS
+from gridappsd import GridAPPSD
 # from pprint import pprint
 goss_sim = "goss.gridappsd.process.request.simulation"
 test_topic = 'goss.gridappsd.test'
@@ -138,8 +138,10 @@ def _startTest(username,password,gossServer='localhost',stompPort='61613', simul
     print()
     print(json.dumps(testCfgAll,indent=2))
 
-    goss = GOSS()
-    goss.connect()
+    username = "app_user"
+    password = "1234App"
+    gapps = GridAPPSD(username=username, password=password)
+    gapps.connect()
 
     # simulationId =123
     test_hist_old = False

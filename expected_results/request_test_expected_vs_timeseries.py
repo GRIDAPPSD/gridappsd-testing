@@ -11,7 +11,9 @@ test_input = "/topic/goss.gridappsd.simulation.test.input."
 def start_test(simulationID=1234):
     loc = os.path.realpath(__file__)
     loc = os.path.dirname(loc)
-    gapps = GridAPPSD()
+    username = "app_user"
+    password = "1234App"
+    gapps = GridAPPSD(username=username, password=password)
     gapps.connect()
 
     test_id = str(random.getrandbits(32))

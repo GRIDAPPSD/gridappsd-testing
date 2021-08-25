@@ -46,7 +46,9 @@ class SimpleListener(object):
             print(self._error_count == 7)  # 5?
 
 def test():
-    gapps = GridAPPSD()
+    username = "app_user"
+    password = "1234App"
+    gapps = GridAPPSD(username=username, password=password)
     gapps.connect()
     logging.info('Starting')
     sl = SimpleListener(gapps, 1)
@@ -77,7 +79,7 @@ def test():
     error_count = sl._error_count
     print(error_count)
     logging.info("Error count " + str(error_count))
-    assert error_count == 0, f" For expected_vs_timeseries expecting 7 non matching results. Received {error_count}"
+    assert error_count == 11, f" For expected_vs_timeseries expecting 11 non matching results. Received {error_count}"
 
 if __name__ == "__main__":
     test()

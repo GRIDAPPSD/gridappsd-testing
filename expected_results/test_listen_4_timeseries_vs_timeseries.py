@@ -44,7 +44,9 @@ class SimpleListener(object):
 
 
 def test():
-    gapps = GridAPPSD()
+    username = "app_user"
+    password = "1234App"
+    gapps = GridAPPSD(username=username, password=password)
     gapps.connect()
     logging.info('Starting')
     sl = SimpleListener(gapps, 1)

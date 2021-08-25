@@ -2,7 +2,7 @@ import json
 import time
 import os
 import argparse
-from gridappsd import GOSS
+from gridappsd import GridAPPSD
 import random
 goss_sim = "goss.gridappsd.process.request.simulation"
 test_topic = 'goss.gridappsd.test'
@@ -22,10 +22,12 @@ def start_test(app_name='sample_app'):
     print("request")
     print(json.dumps(req_template,indent=2))
     # exit(0)
-    goss = GOSS()
-    goss.connect()
+    username = "app_user"
+    password = "1234App"
+    gapps = GridAPPSD(username=username, password=password)
+    gapps.connect()
 
-    simulationId = goss.get_response(goss_sim, simCfg13pv, timeout=10)
+    simulationId = gapps.get_response(goss_sim, simCfg13pv, timeout=10)
     print('sent simulation request')
     print('simulation id ', simulationId)
 

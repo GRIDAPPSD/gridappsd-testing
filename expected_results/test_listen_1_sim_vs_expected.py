@@ -61,8 +61,11 @@ def test():
 
     # gapps = GridAPPSD(opts.test_id, address=utils.get_gridappsd_address(),
     #                   username=utils.get_gridappsd_user(), password=utils.get_gridappsd_pass())
-    gapps = GridAPPSD()
+    username = "app_user"
+    password = "1234App"
+    gapps = GridAPPSD(username=username, password=password)
     gapps.connect()
+    assert gapps.connected
     sl = SimpleListener(gapps, 1)
     print(test_output_topic+str(test_id))
     response = gapps.subscribe(test_output_topic+str(test_id), sl)
@@ -73,7 +76,7 @@ def test():
 
     finished=False
     while not finished:
-        time.sleep(75)
+        time.sleep(85)
         finished = True
     error_count = sl._error_count
     print(error_count)
