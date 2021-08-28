@@ -1,0 +1,67 @@
+name: Run All Pytests
+
+on: 
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 10 * * 1'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.7.10]
+    
+    steps:
+      - name: Set static enviornment values
+        run: |
+          echo "RESULTS=gridappsd-testing_$(date +\"%Y%m%d_%H%M%S\")_${GITHUB_REF##*/}.html" >> $GITHUB_ENV
+          echo "BRANCH_RESULTS=gridappsd-testing_${GITHUB_REF##*/}.html" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Integration Tests
+        env:
+          GRIDAPPSD_USER: ${{ secrets.GRIDAPPSD_USER }}
+          GRIDAPPSD_PASSWORD: ${{ secrets.GRIDAPPSD_PASSWORD }}
+        run: |
+          mkdir out
+          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=2700
+
+      - name: Archive test results
+        if: ${{ always() }}
+        uses: prewk/s3-cp-action@v2
+        with:
+          aws_access_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_region: 'us-west-2'
+          source: "out/${{ env.RESULTS }}"
+          dest: "s3://gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.RESULTS }}"
+
+      - name: Archive branch test results
+        if: ${{ always() }}
+        uses: prewk/s3-cp-action@v2
+        with:
+          aws_access_key_id: ${{ secrets.AWS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws_region: 'us-west-2'
+          source: "out/${{ env.RESULTS }}"
+          dest: "s3://gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.BRANCH_RESULTS }}"
+
+      - name: Test Reports
+        if: ${{ always() }}
+        run: |
+          echo "https://s3-us-west-2.amazonaws.com/gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.RESULTS }}"
+          echo "https://s3-us-west-2.amazonaws.com/gridappsd-builds/GRIDAPPSD/gridappsd-testing/${{ env.BRANCH_RESULTS }}"

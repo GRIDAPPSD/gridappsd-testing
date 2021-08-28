@@ -15,7 +15,7 @@
                     },
                     "value": {
                         "type": "uri",
-                        "value": "http://localhost:8889/bigdata/sparql#_4F76A5F9-271D-9EB8-5E31-AA362D86F2C3"
+                        "value": "http://localhost:8889/bigdata/namespace/kb/sparql#_4F76A5F9-271D-9EB8-5E31-AA362D86F2C3"
                     }
                 },
                 {
@@ -25,7 +25,7 @@
                     },
                     "value": {
                         "type": "uri",
-                        "value": "http://localhost:8889/bigdata/sparql#_B42A7C50-D9A6-4D9B-A8B1-77832E42906D"
+                        "value": "http://localhost:8889/bigdata/namespace/kb/sparql#_B42A7C50-D9A6-4D9B-A8B1-77832E42906D"
                     }
                 },
                 {
@@ -35,7 +35,7 @@
                     },
                     "value": {
                         "type": "uri",
-                        "value": "http://localhost:8889/bigdata/sparql#_973FDFE4-BA41-4B00-A083-79192334A4F5"
+                        "value": "http://localhost:8889/bigdata/namespace/kb/sparql#_973FDFE4-BA41-4B00-A083-79192334A4F5"
                     }
                 },
                 {
@@ -71,6 +71,6 @@
             ]
         }
     },
-    "id": "835013065",
+    "id": "2107473297",
     "responseComplete": true
 }
