@@ -10,7 +10,7 @@ test_topic = 'goss.gridappsd.test'
 responseQueueTopic = '/temp-queue/response-queue'
 goss_simulation_status_topic = '/topic/goss.gridappsd/simulation/status/'
 
-def start_test(simulationID, app_name ='sample_app', start_time='1248156000',duration='60',feeder_name='_C1C3E687-6FFD-C753-582B-632A27E28507'):
+def start_test(simulationID, app_name ='sample_app', testOutput=False, start_time='1248156000',duration='60',feeder_name='_C1C3E687-6FFD-C753-582B-632A27E28507'):
     events = [{
         "message": {
             "forward_differences": [
@@ -37,7 +37,7 @@ def start_test(simulationID, app_name ='sample_app', start_time='1248156000',dur
     testCfgAll = {
                "appId": app_name,
                "testId": test_id,
-               "testOutput": False,
+               "testOutput": testOutput,
                "interval": 10
                }
 

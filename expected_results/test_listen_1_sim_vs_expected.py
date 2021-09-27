@@ -55,7 +55,7 @@ def test():
     #                     help="Simulation id to use for responses on the message bus.")
     #
     # opts = parser.parse_args()
-    sim_id, test_id = request_test_expected_vs_running.start_test()
+    sim_id, test_id = request_test_expected_vs_running.start_test(testOutput=False)
     time.sleep(2)
     print('sent test request ' + test_id)
 

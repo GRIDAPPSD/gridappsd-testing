@@ -15,12 +15,12 @@
                {
                 "measurement_mrid": "_00347396-b4b0-4218-9aba-b363f2cda841",
                 "angle": 118.66041090126667,
-                "magnitude": 2425.0820667756834,
+                "magnitude": 2425.4464236409276,
                 "simulation_id": "1961648576",
                 "time": 1248156002},
                {
                 "measurement_mrid": "_0044ae64-1c72-4e81-b412-d7349ce267d3",
-                "angle": -39.42744945710241,
+                "angle": -38.44540074843378,
                 "magnitude": 374545.4981119089,
                 "simulation_id": "1961648576",
                 "time": 1248156002}

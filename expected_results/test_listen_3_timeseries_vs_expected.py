@@ -61,8 +61,10 @@ def test():
     # with open('test_id_request_1.json') as f:
     #     sim_id = json.load(f)
     # sim_id = sim_id['sim_id1']
-
-    test_id2 = request_test_expected_vs_timeseries.start_test(sim_id)
+    # sim_id='2105518764'
+    test_id2 = request_test_expected_vs_timeseries.start_test(simulationID=sim_id,
+                                                              app_name='sample_app',
+                                                              testOutput=False)
 
     response = gapps.subscribe(test_output_topic + str(test_id2), sl)
     print(response)

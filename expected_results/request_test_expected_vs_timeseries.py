@@ -8,7 +8,13 @@ import os
 goss_sim = "goss.gridappsd.process.request.simulation"
 test_input = "/topic/goss.gridappsd.simulation.test.input."
 
-def start_test(simulationID=1234):
+def start_test(simulationID=1234,
+               app_name='sample_app',
+               testOutput=True,
+               start_time='1248156000',
+               duration='60',
+               feeder_name='_C1C3E687-6FFD-C753-582B-632A27E28507',
+               expected_file="expected_result_series_filtered_123_normal_small_4.json"):
     loc = os.path.realpath(__file__)
     loc = os.path.dirname(loc)
     username = "app_user"
@@ -18,17 +24,18 @@ def start_test(simulationID=1234):
 
     test_id = str(random.getrandbits(32))
     testCfgAll = {
-               "appId": "sample_app",
-                "testId": test_id
+               "appId": app_name,
+                "testId": test_id,
+                "testOutput": testOutput,
                }
 
-    with open(os.path.join(loc,"expected_result_series_filtered_123_normal_small_4.json")) as f:
+    with open(os.path.join(loc,expected_file)) as f:
     # with open("expected_result_series_filtered_9500.json") as f:
         expectedJson = json.load(f)
 
     testCfgAll['compareWithSimId'] = simulationID # 847461010
-    testCfgAll['start_time'] = 1248156000
-    testCfgAll['duration'] = 60
+    testCfgAll['start_time'] = start_time
+    testCfgAll['duration'] = duration
     testCfgAll['interval'] = 10
     testCfgAll['expectedResults'] = expectedJson['expectedResults']
     testCfgAll['testType'] = 'expected_vs_timeseries'

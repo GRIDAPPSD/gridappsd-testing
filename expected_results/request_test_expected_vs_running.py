@@ -9,7 +9,7 @@ test_topic = 'goss.gridappsd.test'
 responseQueueTopic = '/temp-queue/response-queue'
 goss_simulation_status_topic = '/topic/goss.gridappsd/simulation/status/'
 
-def start_test(app_name='sample_app',start_time='1248156000',duration='60',feeder_name='_C1C3E687-6FFD-C753-582B-632A27E28507',expected_file="expected_result_series_filtered_123_normal_small_4.json"):
+def start_test(app_name='sample_app', testOutput=True, start_time='1248156000',duration='60',feeder_name='_C1C3E687-6FFD-C753-582B-632A27E28507',expected_file="expected_result_series_filtered_123_normal_small_4.json"):
     loc = os.path.realpath(__file__)
     loc = os.path.dirname(loc)
     print(loc)
@@ -39,7 +39,8 @@ def start_test(app_name='sample_app',start_time='1248156000',duration='60',feede
     test_id = str(random.getrandbits(32))
     testCfgAll = {
                "appId": "sample_app",
-               "testId": str(test_id)
+               "testId": str(test_id),
+               "testOutput": testOutput,
                }
 
     # with open("expected_result_series_filtered_9500.json") as f:

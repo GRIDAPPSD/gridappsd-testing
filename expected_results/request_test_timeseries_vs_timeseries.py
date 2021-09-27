@@ -6,7 +6,7 @@ from gridappsd import GridAPPSD
 goss_sim = "goss.gridappsd.process.request.simulation"
 test_input = "/topic/goss.gridappsd.simulation.test.input."
 
-def start_test(simulationID1, simulationID2, start_time=1248156000,duration=60):
+def start_test(simulationID1, simulationID2, testOutput=False, start_time=1248156000,duration=60):
     username = "app_user"
     password = "1234App"
     gapps = GridAPPSD(username=username, password=password)
@@ -15,7 +15,7 @@ def start_test(simulationID1, simulationID2, start_time=1248156000,duration=60):
     testCfgAll = {
                "appId": "sample_app",
                 "testId": test_id,
-                "testOutput": False,
+                "testOutput": testOutput,
                 "start_time":start_time,
                 "duration":duration
                }
