@@ -75,9 +75,9 @@ def on_message(self, message):
 
 
 @pytest.mark.parametrize("sim_config_file, sim_result_file", [
-    ("13-new.json", "13-node-sim.output"),
-    ("123-config.json", "123-simulation.output"),
-    ("9500-config.json", "9500-simulation.output")])
+    #("13-new.json", "13-node-sim.output")])
+    ("123-config.json", "123-simulation.output")])
+    #("9500-config.json", "9500-simulation.output")])
 def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
     global resume_msg
     global pause_msg
@@ -183,10 +183,10 @@ def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
 
 
 @pytest.mark.parametrize("sim_output_file, sim_result_file", [
-    ("13-node-sim.output", "13-node-sim.output"),
-    ("123-simulation.output", "123-simulation.output"),
-    ("9500-simulation.output", "9500-simulation.output")])
-@pytest.mark.xfail(strict=True)
+    #("13-node-sim.output", "13-node-sim.output")])
+    ("123-simulation.output", "123-simulation.output")])
+   #("9500-simulation.output", "9500-simulation.output")])
+#@pytest.mark.xfail(strict=True)
 def test_are_simulation_results_matching(sim_output_file, sim_result_file):
     sim_output_file = os.path.join(os.path.dirname(__file__), f"simulation_baseline_files/{sim_result_file}")
     sim_result_file = f"/tmp/output/{sim_result_file}"
@@ -225,5 +225,5 @@ def test_are_simulation_results_matching(sim_output_file, sim_result_file):
             print(i + " mRID not present in simulation output")
             list_of_mismatch.append(i)
             print("Failed")
-    # print("list of mRIDS not present are" + str(list_of_mismatch))
+    #print("list of mRIDS not present are" + str(list_of_mismatch))
     assert len(list_of_mismatch) == 0, "Number of mismatches are :" + str(len(list_of_mismatch)) + str(list_of_mismatch)
