@@ -69,8 +69,8 @@ def test_timeseries_output(gridappsd_client, sim_config_file, sim_result_file):
         result_weather_data = gapps.get_response(t.TIMESERIES, query1, timeout=60)
         LOGGER.info('Weather data received ')
 
-    #sleep(60)
     sim.run_loop()
+
     with open("./simulation_config_files/timeseries_query.json", 'r') as f:
         query2 = json.load(f)
         query2["queryFilter"]["simulation_id"] = sim.simulation_id
@@ -108,6 +108,7 @@ def test_timeseries_simulation_api():
     LOGGER.info('Simulation data query has expected output')
 
 
+@pytest.mark.xfail(strict=True, reason="sensor simulator requires updates for gridappsd-python")
 def test_sensor_simulator_api():
     global result_sensor_query
     try:
