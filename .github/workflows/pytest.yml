@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.7.10]
+        python-version: [3.8.12]
     
     steps:
       - name: Set static enviornment values
@@ -38,7 +38,7 @@ jobs:
           GRIDAPPSD_PASSWORD: ${{ secrets.GRIDAPPSD_PASSWORD }}
         run: |
           mkdir out
-          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=2700
+          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=2700  
 
       - name: Archive test results
         if: ${{ always() }}
