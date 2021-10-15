@@ -53,8 +53,7 @@ def docker_dependencies():
 
 @pytest.fixture
 def gridappsd_client(request, docker_dependencies):
-    #with run_gridappsd_container(stop_after=STOP_CONTAINER_AFTER_TEST):
-    with run_gridappsd_container(stop_after=False):
+    with run_gridappsd_container(stop_after=STOP_CONTAINER_AFTER_TEST):
         gappsd = GridAPPSD()
         gappsd.connect()
         assert gappsd.connected

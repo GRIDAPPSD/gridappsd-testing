@@ -76,7 +76,7 @@ def on_message(self, message):
 
 @pytest.mark.parametrize("sim_config_file, sim_result_file", [
     ("13-new.json", "13-node-sim.output"),
-    ("123-config.json", "123-simulation.output"),
+    #("123-config.json", "123-simulation.output"),
     ("9500-config.json", "9500-simulation.output")])
 def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
     global resume_msg
@@ -184,7 +184,7 @@ def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
 
 @pytest.mark.parametrize("sim_output_file, sim_result_file", [
     ("13-node-sim.output", "13-node-sim.output"),
-    ("123-simulation.output", "123-simulation.output"),
+    #("123-simulation.output", "123-simulation.output"),
     ("9500-simulation.output", "9500-simulation.output")])
 #@pytest.mark.xfail(strict=True)
 def test_are_simulation_results_matching(sim_output_file, sim_result_file):
