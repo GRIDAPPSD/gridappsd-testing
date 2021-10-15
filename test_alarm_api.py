@@ -83,7 +83,7 @@ PREFIX r:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     return results_obj
 
 
-@pytest.mark.parametrize("sim_config_file", [("13-new.json"), ("123-config.json"), ("9500-alarm-config.json")])
+@pytest.mark.parametrize("sim_config_file", [("13-alarm.json"), ("123-alarm.json"), ("9500-alarm.json")])
 def test_alarm_output(gridappsd_client, sim_config_file):
     global measurement_id
     sim_config_file = os.path.join(os.path.dirname(__file__), f"simulation_config_files/{sim_config_file}")
