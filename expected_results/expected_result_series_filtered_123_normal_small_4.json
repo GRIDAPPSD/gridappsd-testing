@@ -1,0 +1,139 @@
+{
+  "expectedResults": {
+    "output": {
+      "1248156002": {
+        "simulation_id": "559402036",
+          "message": {
+            "timestamp": 1248156002,
+            "measurements": [
+              {
+                "measurement_mrid": "_000b01a1-8238-4372-95c0-82aad26ea311",
+                "angle": -5.066423674487563,
+                "magnitude": 2388.676720682955,
+                "simulation_id": "1961648576",
+                "time": 1248156002},
+               {
+                "measurement_mrid": "_00347396-b4b0-4218-9aba-b363f2cda841",
+                "angle": 118.66041090126667,
+                "magnitude": 2425.4464236409276,
+                "simulation_id": "1961648576",
+                "time": 1248156002},
+               {
+                "measurement_mrid": "_0044ae64-1c72-4e81-b412-d7349ce267d3",
+                "angle": -38.44540074843378,
+                "magnitude": 374545.4981119089,
+                "simulation_id": "1961648576",
+                "time": 1248156002}
+            ]
+          }
+        }
+      },
+    "input": {
+      "1248156016": {
+        "simulation_id": "559402036",
+        "message": {
+          "timestamp": 1248156016,
+          "measurements": [
+            {"hasMeasurementDifference": "FORWARD",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156016,
+              "attribute": "ShuntCompensator.sections",
+              "value": 1.0,
+              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"},
+             {"hasMeasurementDifference": "REVERSE",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156016,
+              "attribute": "ShuntCompensator.sections",
+              "value": 0.0,
+              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"}
+          ]
+        }
+      },
+      "1248156029": {
+        "simulation_id": "559402036",
+        "message": {
+          "timestamp": 1248156029,
+          "measurements": [
+            {"hasMeasurementDifference": "FORWARD",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156029,
+              "attribute": "ShuntCompensator.sections",
+              "value": 0.0,
+              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"},
+             {"hasMeasurementDifference": "REVERSE",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156029,
+              "attribute": "ShuntCompensator.sections",
+              "value": 1.0,
+              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"},
+            {"hasMeasurementDifference": "FORWARD",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156029,
+              "attribute": "ShuntCompensator.sections",
+              "value": 0.0,
+              "object": "_only_in_expected_MRID_time_does_not_matches"},
+             {"hasMeasurementDifference": "REVERSE",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156029,
+              "attribute": "ShuntCompensator.sections",
+              "value": 1.0,
+              "object": "_only_in_expected_MRID_time_does_not_matches"}
+          ]
+        }
+      },
+
+      "27": {
+        "simulation_id": "559402036",
+        "message": {
+          "timestamp": 1587670665,
+          "measurements": [
+            {"hasMeasurementDifference": "FORWARD",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1587670665,
+              "attribute": "ShuntCompensator.sections",
+              "value": 0.0,
+              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"},
+             {"hasMeasurementDifference": "REVERSE",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1587670665,
+              "attribute": "ShuntCompensator.sections",
+              "value": 1.0,
+              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"}
+          ]
+        }
+      },
+      "1248156044": {
+        "simulation_id": "559402036",
+        "message": {
+          "timestamp": 1248156044,
+          "measurements": [
+            {"hasMeasurementDifference": "FORWARD",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156044,
+              "attribute": "ShuntCompensator.sections",
+              "value": 0.0,
+              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"},
+             {"hasMeasurementDifference": "REVERSE",
+              "difference_mrid": "1fae379c-d0e2-4c80-8f2c-c5d7a70ff4d4",
+              "simulation_id": "1961648576",
+              "time": 1248156044,
+              "attribute": "ShuntCompensator.sections",
+              "value": 1.0,
+              "object": "_939CA567-AA3D-4972-AABC-1D0AAF4859FE"}
+          ]
+        }
+      }
+    }
+  }
+}
+
+
