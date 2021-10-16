@@ -76,7 +76,7 @@ def on_message(self, message):
 
 @pytest.mark.parametrize("sim_config_file, sim_result_file", [
     ("13-new.json", "13-node-sim.output"),
-    ("123-config.json", "123-simulation.output"),
+    #("123-config.json", "123-simulation.output"),
     ("9500-config.json", "9500-simulation.output")])
 def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
     global resume_msg
@@ -108,7 +108,7 @@ def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
 
         sim = Simulation(gapps, run_config)
 
-        def onmeasurement(sim, timestep, measurements):
+        def onmeasurement(sim, timestep, measurement):
             LOGGER.info('Measurement received at %s', timestep)
             nonlocal rcvd_measurement
             nonlocal received_measurment_count
@@ -118,7 +118,7 @@ def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
                 if not rcvd_measurement:
                     print(f"A measurement happened at {timestep}")
                     # outfile.write(f"{timestep}|{json.dumps(measurements)}\n")
-                    data = {"data": measurements}
+                    data = {"data": measurement}
                     outfile.write(json.dumps(data))
                     rcvd_measurement = True
 
@@ -138,19 +138,19 @@ def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
             sim_complete = True
             LOGGER.info('Simulation Complete')
 
-        LOGGER.info('sim.add_onmesurement_callback')
+        LOGGER.info('sim.add_onmeasurement_callback')
+        sim.add_onmeasurement_callback(onmeasurement)
+        LOGGER.info('sim.add_oncomplete_callback')
+        sim.add_oncomplete_callback(onfinishsimulation)
 
         LOGGER.info('Starting sim')
         sim.start_simulation()
         print(sim.simulation_id)
-        sim.add_onmesurement_callback(onmeasurement)
         # sim.add_ontimestep_callback(ontimestep)
         gapps.subscribe(t.simulation_log_topic(sim.simulation_id), on_message)
-        sim.add_oncomplete_callback(onfinishsimulation)
-        LOGGER.info('sim.add_oncomplete_callback')
         secs = 0
         num_measurements_before_pause = 3
-        while received_measurment_count < num_measurements_before_pause:
+        while received_measurment_count < num_measurements_before_pause and sim._running_or_paused:
             LOGGER.info(f"Waiting for at least {num_measurements_before_pause} measurements"
                         f"but have {received_measurment_count} time take {secs}s ")
             secs += 1
@@ -178,18 +178,15 @@ def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
         sleep(10)
         assert "resumed" in resume_msg, 'Resume command not called'
 
-        while not sim_complete:
-            LOGGER.info('Sleeping')
-            sleep(5)
-
+        sim.run_loop()
         # are_simulation_results_matching(sim_expected_results_file, sim_actual_result_file)
 
 
 @pytest.mark.parametrize("sim_output_file, sim_result_file", [
     ("13-node-sim.output", "13-node-sim.output"),
-    ("123-simulation.output", "123-simulation.output"),
+    #("123-simulation.output", "123-simulation.output"),
     ("9500-simulation.output", "9500-simulation.output")])
-@pytest.mark.xfail(strict=True)
+#@pytest.mark.xfail(strict=True)
 def test_are_simulation_results_matching(sim_output_file, sim_result_file):
     sim_output_file = os.path.join(os.path.dirname(__file__), f"simulation_baseline_files/{sim_result_file}")
     sim_result_file = f"/tmp/output/{sim_result_file}"
@@ -228,5 +225,5 @@ def test_are_simulation_results_matching(sim_output_file, sim_result_file):
             print(i + " mRID not present in simulation output")
             list_of_mismatch.append(i)
             print("Failed")
-    # print("list of mRIDS not present are" + str(list_of_mismatch))
+    #print("list of mRIDS not present are" + str(list_of_mismatch))
     assert len(list_of_mismatch) == 0, "Number of mismatches are :" + str(len(list_of_mismatch)) + str(list_of_mismatch)
