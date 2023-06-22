@@ -15,5 +15,8 @@ pip3 install -r requirements.txt
 export GRIDAPPSD_USER=<user>
 export GRIDAPPSD_PASSWORD=<password>
 
+# remove any existing docker containers before testing (if not you may see connection failed errors)
+ docker rm -f $(docker ps -a -q)
+ 
 # run pytest
 pytest -s
