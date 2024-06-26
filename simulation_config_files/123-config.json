@@ -1,6 +1,6 @@
 {
   "power_system_config": {
-    "GeographicalRegion_name": "_24809814-4EC6-29D2-B509-7F8BFB646437",
+    "GeographicalRegion_name": "_73C512BD-7249-4F50-50DA-D93849B89C43",
     "SubGeographicalRegion_name": "_1CD7D2EE-3C91-3248-5662-A43EFEFAC224",
     "Line_name": "_C1C3E687-6FFD-C753-582B-632A27E28507"
   },
@@ -11,12 +11,12 @@
     ]
   },
   "simulation_config": {
-    "start_time": "1373814000",
+    "start_time": "1718349178",
     "duration": "150",
     "simulator": "GridLAB-D",
     "timestep_frequency": 1000,
     "timestep_increment": 1000,
-    "run_realtime": false,
+    "run_realtime": true,
     "simulation_name": "ieee123",
     "power_flow_solver_method": "NR",
     "model_creation_config": {

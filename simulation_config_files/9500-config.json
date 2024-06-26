@@ -10,12 +10,12 @@
     ]
   },
   "simulation_config": {
-    "start_time": "1373814000",
+    "start_time": "1718349346",
     "duration": "150",
     "simulator": "GridLAB-D",
     "timestep_frequency": 1000,
     "timestep_increment": 1000,
-    "run_realtime": false,
+    "run_realtime": true,
     "simulation_name": "9500finalnode",
     "power_flow_solver_method": "NR",
     "model_creation_config": {
