@@ -23,7 +23,7 @@ LOGGER = logging.getLogger(__name__)
     ("ieee123transactive", "_503D6E20-F499-4CC7-8051-971E23D0BF79"),
     ("ieee13nodeckt", "_49AD8E07-3BF9-A4E2-CB8F-C3722F837B62"),
     ("ieee13nodecktassets", "_5B816B93-7A5F-B64C-8460-47C17D6E4B0F"),
-    ("test9500new", "_AAE94E4A-2465-6F5E-37B1-3E72183A4E44"),
+    ("final9500node", "_EE71F6C9-56F0-4167-A14E-7F4C71F10EAA"),
 ])
 def test_symbols_file_output(gridappsd_client, model_name, model_id):
 
