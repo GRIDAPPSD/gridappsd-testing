@@ -8,3 +8,4 @@ pytest-html
 pytest-timeout
 dictdiffer 
 deepdiff
+cim-graph

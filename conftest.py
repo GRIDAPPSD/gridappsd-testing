@@ -9,7 +9,7 @@ import sys
 import pytest
 
 from gridappsd import GridAPPSD, GOSS
-from gridappsd.docker_handler import run_dependency_containers, run_gridappsd_container, Containers
+from docker_handler import run_dependency_containers, run_gridappsd_container, Containers
 
 levels = dict(
     CRITICAL=50,
@@ -42,17 +42,17 @@ logging.getLogger("docker.auth").setLevel(logging.INFO)
 STOP_CONTAINER_AFTER_TEST = os.environ.get('GRIDAPPSD_STOP_CONTAINERS_AFTER_TESTS', True)
 
 
+
 @pytest.fixture(scope="module")
 def docker_dependencies():
-    print("Docker dependencies")
     # Containers.reset_all_containers()
 
     with run_dependency_containers(stop_after=STOP_CONTAINER_AFTER_TEST) as dep:
         yield dep
-    print("Cleanup docker dependencies")
 
 @pytest.fixture
 def gridappsd_client(request, docker_dependencies):
+
     with run_gridappsd_container(stop_after=STOP_CONTAINER_AFTER_TEST):
         gappsd = GridAPPSD()
         gappsd.connect()
@@ -62,7 +62,6 @@ def gridappsd_client(request, docker_dependencies):
         if request.cls is not None:
             request.cls.gridappsd_client = gappsd
         yield gappsd
-
         gappsd.disconnect()
 
 @pytest.fixture

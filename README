@@ -20,3 +20,5 @@ export GRIDAPPSD_PASSWORD=<password>
  
 # run pytest
 pytest -s
+
+#(If you need to run the pytest command using sudo make sure to include the -E flag to include environment variables)
