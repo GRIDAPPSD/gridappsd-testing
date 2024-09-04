@@ -50,7 +50,8 @@ def test_log_stored(record_property, logger_and_gridapspd):
     time.sleep(5)
     response = gapps.get_response(t.LOGS, payload, timeout=60)
     assert response['data'], "There were not any records returned."
-
+    if type(response['data'] == str):
+        response['data'] = json.loads(response['data'])
     for x in response['data']:
         if x['source'] != 'sample_app':
             continue
@@ -100,7 +101,8 @@ def test_simulation_log_stored(record_property, logger_and_gridapspd):
 
     response = gapps.get_response(t.LOGS, payload, timeout=60)
     assert response['data'], "There were not any records returned."
-
+    if type(response['data'] == str):
+        response['data'] = json.loads(response['data'])
     for x in response['data']:
         if x['source'] != 'new_sample_app':
             continue
