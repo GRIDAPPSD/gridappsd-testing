@@ -2,6 +2,7 @@ import os
 import time
 import mock
 import pytest
+import json
 from gridappsd import GridAPPSD, topics as t
 from gridappsd.loghandler import Logger
 
