@@ -88,8 +88,10 @@ def test_timeseries_output(gridappsd_client, sim_config_file, sim_result_file):
 
 def test_weather_api():
     global result_weather_data
+    if type(result_weather_data['data'] == str):
+        result_weather_data['data'] = json.loads(result_weather_data['data'])
     try:
-        assert "Diffuse" in result_weather_data["data"][0], \
+         assert "Diffuse" in result_weather_data["data"][0], \
             f'Weather data query does not have expected output {result_weather_data["data"][0]}'
     except KeyError:
         assert (result_weather_data["data"] != {}), \
@@ -99,6 +101,8 @@ def test_weather_api():
 
 def test_timeseries_simulation_api():
     global result_timeseries_query
+    if type(result_timeseries_query['data'] == str):
+        result_timeseries_query['data'] = json.loads(result_timeseries_query['data'])
     try:
         assert "hasSimulationMessageType" in result_timeseries_query["data"][0], \
             f'Simulation data query does not have expected output {result_timeseries_query["data"][0]}'
