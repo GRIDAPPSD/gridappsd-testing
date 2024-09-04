@@ -278,3 +278,4 @@ def test_comm_outage():
 def test_alarm_count():
     global alarm_count
     assert alarm_count > 2, f"Expecting 3 alarms received {alarm_count}"
+ 
