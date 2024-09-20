@@ -142,8 +142,6 @@ def test_weather_api():
 def test_timeseries_simulation_api():
     global result_timeseries_query
     LOGGER.info('Timeseries data received in test ')
-    LOGGER.info(result_timeseries_query)
-    LOGGER.info(type(result_timeseries_query))
     if type(result_timeseries_query) == str:
         result_timeseries_query = json.loads(result_timeseries_query)
 
