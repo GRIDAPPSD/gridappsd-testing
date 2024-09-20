@@ -86,6 +86,7 @@ def test_timeseries_output(gridappsd_client, sim_config_file, sim_result_file):
     with open("./simulation_config_files/timeseries_query.json", 'r') as f:
         query2 = json.load(f)
         #simulation_end = int(time())
+        simulation_end = int(simulation_start)+25
 
         query2["queryFilter"]["simulation_id"] = sim.simulation_id
         query2["queryFilter"]["starttime"] = simulation_start
