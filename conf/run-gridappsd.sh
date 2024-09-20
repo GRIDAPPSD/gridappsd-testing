@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ 
 echo " "
 if [ "$1" = "version" -o "$1" = "-v" -o "$1" = "--version" ]; then
   if [ -f /gridappsd/dockerbuildversion.txt ]; then
