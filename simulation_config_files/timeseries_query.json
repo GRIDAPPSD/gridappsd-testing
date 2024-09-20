@@ -1,8 +1,8 @@
 {  "queryMeasurement":"simulation",
    "queryFilter":{
-      "simulation_id":"582881157",
-      "starttime":1373814002,
-      "endtime":1373814003
+      "simulation_id":"X",
+      "starttime":0,
+      "endtime":0
    
    },
    "responseFormat":"JSON"
