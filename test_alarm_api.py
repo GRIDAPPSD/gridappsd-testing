@@ -104,8 +104,8 @@ def test_alarm_output(gridappsd_client, sim_config_file):
     sim_config_file = os.path.join(os.path.dirname(__file__), f"simulation_config_files/{sim_config_file}")
     assert os.path.exists(sim_config_file), f"File {sim_config_file} must exist to run simulation test"
     print('confirmed test file exists')
-    cim_profile = 'rc4_2021'
-    iec61970_301 = 7
+    cim_profile = 'cimhub_2023'
+    iec61970_301 = 8
     cim = importlib.import_module(f'cimgraph.data_profile.{cim_profile}')
     print('about to connect to bg')
     # Blazegraph connection for running outside the container

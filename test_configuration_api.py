@@ -18,12 +18,12 @@ from gridappsd import GridAPPSD, topics as t
 LOGGER = logging.getLogger(__name__)
 
 @pytest.mark.parametrize("model_name, model_id", [
-    ("ieee123", "_C1C3E687-6FFD-C753-582B-632A27E28507"),
-    ("ieee123pv", "_E407CBB6-8C8D-9BC9-589C-AB83FBF0826D"),
-    ("ieee123transactive", "_503D6E20-F499-4CC7-8051-971E23D0BF79"),
-    ("ieee13nodeckt", "_49AD8E07-3BF9-A4E2-CB8F-C3722F837B62"),
-    ("ieee13nodecktassets", "_5B816B93-7A5F-B64C-8460-47C17D6E4B0F"),
-    ("final9500node", "_EE71F6C9-56F0-4167-A14E-7F4C71F10EAA"),
+    ("ieee123", "C1C3E687-6FFD-C753-582B-632A27E28507"),
+    ("ieee123pv", "E407CBB6-8C8D-9BC9-589C-AB83FBF0826D"),
+    ("ieee123transactive", "503D6E20-F499-4CC7-8051-971E23D0BF79"),
+    ("ieee13nodeckt", "49AD8E07-3BF9-A4E2-CB8F-C3722F837B62"),
+    ("ieee13nodecktassets", "5B816B93-7A5F-B64C-8460-47C17D6E4B0F"),
+    ("final9500node", "EE71F6C9-56F0-4167-A14E-7F4C71F10EAA"),
 ])
 def test_symbols_file_output(gridappsd_client, model_name, model_id):
 
