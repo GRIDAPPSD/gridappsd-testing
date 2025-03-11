@@ -26,35 +26,7 @@
                 {
                     "feeder_name": {
                         "type": "literal",
-                        "value": "j1"
-                    },
-                    "subregion_name": {
-                        "type": "literal",
-                        "value": "DPV"
-                    },
-                    "region_name": {
-                        "type": "literal",
-                        "value": "EPRI"
-                    }
-                },
-                {
-                    "feeder_name": {
-                        "type": "literal",
                         "value": "ieee123"
-                    },
-                    "subregion_name": {
-                        "type": "literal",
-                        "value": "Medium"
-                    },
-                    "region_name": {
-                        "type": "literal",
-                        "value": "IEEE"
-                    }
-                },
-                {
-                    "feeder_name": {
-                        "type": "literal",
-                        "value": "ieee123pv"
                     },
                     "subregion_name": {
                         "type": "literal",
@@ -110,34 +82,6 @@
                 {
                     "feeder_name": {
                         "type": "literal",
-                        "value": "ieee8500"
-                    },
-                    "subregion_name": {
-                        "type": "literal",
-                        "value": "Large"
-                    },
-                    "region_name": {
-                        "type": "literal",
-                        "value": "IEEE"
-                    }
-                },
-                {
-                    "feeder_name": {
-                        "type": "literal",
-                        "value": "test9500new"
-                    },
-                    "subregion_name": {
-                        "type": "literal",
-                        "value": "Large"
-                    },
-                    "region_name": {
-                        "type": "literal",
-                        "value": "IEEE"
-                    }
-                },
-                {
-                    "feeder_name": {
-                        "type": "literal",
                         "value": "final9500node"
                     },
                     "subregion_name": {
@@ -152,15 +96,15 @@
                 {
                     "feeder_name": {
                         "type": "literal",
-                        "value": "ieee123_apps"
+                        "value": "ieee123pv"
                     },
                     "subregion_name": {
                         "type": "literal",
-                        "value": "subregion"
+                        "value": "Medium"
                     },
                     "region_name": {
                         "type": "literal",
-                        "value": "region"
+                        "value": "IEEE"
                     }
                 },
                 {

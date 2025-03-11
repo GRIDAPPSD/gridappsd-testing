@@ -2,13 +2,13 @@
     "feeders": [
         {
             "name": "ieee123transactive",
-            "mRID": "_503D6E20-F499-4CC7-8051-971E23D0BF79",
+            "mRID": "503D6E20-F499-4CC7-8051-971E23D0BF79",
             "substation": "PNNL",
-            "substationID": "_A4C079AE-FE2B-4D11-969E-1268AFC562E9",
+            "substationID": "A4C079AE-FE2B-4D11-969E-1268AFC562E9",
             "subregion": "Medium",
-            "subregionID": "_2BBFD370-B30F-4EC5-B7AE-6873921C8C7C",
+            "subregionID": "2BBFD370-B30F-4EC5-B7AE-6873921C8C7C",
             "region": "IEEE",
-            "regionID": "_24BA911D-65D5-4769-9A30-4178B2DFA203",
+            "regionID": "24BA911D-65D5-4769-9A30-4178B2DFA203",
             "swing_nodes": [
                 {
                     "name": "source",

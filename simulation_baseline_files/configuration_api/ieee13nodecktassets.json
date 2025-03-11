@@ -2,13 +2,13 @@
     "feeders": [
         {
             "name": "ieee13nodecktassets",
-            "mRID": "_5B816B93-7A5F-B64C-8460-47C17D6E4B0F",
+            "mRID": "5B816B93-7A5F-B64C-8460-47C17D6E4B0F",
             "substation": "IEEE13",
-            "substationID": "_6C62C905-6FC7-653D-9F1E-1340F974A587",
+            "substationID": "6C62C905-6FC7-653D-9F1E-1340F974A587",
             "subregion": "Small",
-            "subregionID": "_ABEB635F-729D-24BF-B8A4-E2EF268D8B9E",
+            "subregionID": "ABEB635F-729D-24BF-B8A4-E2EF268D8B9E",
             "region": "IEEE",
-            "regionID": "_73C512BD-7249-4F50-50DA-D93849B89C43",
+            "regionID": "73C512BD-7249-4F50-50DA-D93849B89C43",
             "swing_nodes": [
                 {
                     "name": "source",

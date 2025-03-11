@@ -94,9 +94,9 @@ def compare_ids(measurement_id):
 
 
 @pytest.mark.parametrize("sim_config_file", [
-    ("13-alarm.json") #, 
-    #("123-alarm.json"), 
-    #("9500-alarm.json")
+    ("13-alarm.json") , 
+    ("123-alarm.json"), 
+    ("9500-alarm.json")
     ])
 def test_alarm_output(gridappsd_client, sim_config_file):
     global measurement_id
@@ -106,6 +106,7 @@ def test_alarm_output(gridappsd_client, sim_config_file):
     print('confirmed test file exists')
     cim_profile = 'cimhub_2023'
     iec61970_301 = 8
+
     cim = importlib.import_module(f'cimgraph.data_profile.{cim_profile}')
     print('about to connect to bg')
     # Blazegraph connection for running outside the container
