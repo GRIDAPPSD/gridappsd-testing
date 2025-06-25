@@ -27,6 +27,10 @@ jobs:
           pip install pytest
           pip install -r requirements.txt
 
-      - name: Run pytest
+      - name: Integration Tests
+        env:
+          GRIDAPPSD_USER: ${{ secrets.GRIDAPPSD_USER }}
+          GRIDAPPSD_PASSWORD: ${{ secrets.GRIDAPPSD_PASSWORD }}
         run: |
-          pytest -s
+          mkdir out
+          pytest -rA --html=out/${{ env.RESULTS }} --self-contained-html --timeout=2700  
