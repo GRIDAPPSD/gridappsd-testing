@@ -46,7 +46,7 @@ def test_power_object(gridappsd_client_module):
     gapps = gridappsd_client_module
     sleep_once()
     LOGGER.info('Performing object query')
-    obj = '_46EA069B-F08C-4945-9C08-8F7CABECCF5C'
+    obj = '82E72702-EE94-4580-A137-99A04E0E0E26'
     response = gapps.query_object(obj, model_id=None)
     LOGGER.debug(f'Response: {response}')
     #os.makedirs("/tmp/output", exist_ok=True)

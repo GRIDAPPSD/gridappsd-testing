@@ -11,6 +11,16 @@ from gridappsd import GridAPPSD
 from gridappsd.simulation import Simulation
 from gridappsd import topics as t
 
+
+import importlib
+
+import cimgraph.utils as cimUtils
+from cimgraph.databases import ConnectionParameters
+from cimgraph.databases.blazegraph.blazegraph import BlazegraphConnection
+from cimgraph.databases.gridappsd.gridappsd import GridappsdConnection
+from cimgraph.models import FeederModel
+
+
 LOGGER = logging.getLogger(__name__)
 
 tapchanger_value = []
@@ -23,7 +33,7 @@ def compare_ids(measurement_id):
         global tapchanger_value
         global alarm_count
         global mrid_values
-
+        LOGGER.info(f'RECEIVED MESSAGE {headers["destination"]}')
         if "gridappsd-alarms" in headers["destination"]:
             for y in message:
                 print(message)
@@ -47,51 +57,64 @@ def compare_ids(measurement_id):
     return on_message
 
 
-def get_reg_mrids(gridappsd_obj, mrid):
-    query = """
-PREFIX r:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-    PREFIX c:  <http://iec.ch/TC57/CIM100#>
-    SELECT ?reg_id ?trmid ?rname ?pname ?tname ?bus
-    WHERE {
-    VALUES ?fdrid {"%s"}  # 123
-    ?pxf c:Equipment.EquipmentContainer ?fdr.
-    ?fdr c:IdentifiedObject.mRID ?fdrid.
-    ?rtc r:type c:RatioTapChanger.
-    ?rtc c:IdentifiedObject.name ?rname.
-    ?rtc c:IdentifiedObject.mRID ?reg_id.
-    ?rtc c:RatioTapChanger.TransformerEnd ?end.
-    ?end c:TransformerEnd.Terminal ?trm.
-    ?trm c:IdentifiedObject.mRID ?trmid.
-    ?trm c:Terminal.ConnectivityNode ?cn.
-    ?cn c:IdentifiedObject.name ?bus.
-    ?end c:TransformerEnd.endNumber ?wnum.
-    OPTIONAL {?end c:TransformerTankEnd.phases ?phsraw.
-    bind(strafter(str(?phsraw),"PhaseCode.") as ?phs)}
-    ?end c:TransformerTankEnd.TransformerTank ?tank.
-    ?tank c:TransformerTank.PowerTransformer ?pxf.
-    ?pxf c:IdentifiedObject.name ?pname.
-    ?tank c:IdentifiedObject.name ?tname.
-    }
-    ORDER BY ?pname ?tname ?rname ?wnum ?bus
-    """ % mrid
+#def get_reg_mrids(gridappsd_obj, mrid):
+    #query = """
+    #PREFIX r:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    #PREFIX c:  <http://iec.ch/TC57/CIM100#>
+    #SELECT ?reg_id ?trmid ?rname ?pname ?tname ?bus
+    #WHERE {
+    #VALUES ?fdrid {"%s"}  # 123
+    #?pxf c:Equipment.EquipmentContainer ?fdr.
+    #?fdr c:IdentifiedObject.mRID ?fdrid.
+    #?rtc r:type c:RatioTapChanger.
+    #?rtc c:IdentifiedObject.name ?rname.
+    #?rtc c:IdentifiedObject.mRID ?reg_id.
+    #?rtc c:RatioTapChanger.TransformerEnd ?end.
+    #?end c:TransformerEnd.Terminal ?trm.
+    #?trm c:IdentifiedObject.mRID ?trmid.
+    #?trm c:Terminal.ConnectivityNode ?cn.
+    #?cn c:IdentifiedObject.name ?bus.
+    #?end c:TransformerEnd.endNumber ?wnum.
+    #OPTIONAL {?end c:TransformerTankEnd.phases ?phsraw.
+    #bind(strafter(str(?phsraw),"PhaseCode.") as ?phs)}
+    #?end c:TransformerTankEnd.TransformerTank ?tank.
+    #?tank c:TransformerTank.PowerTransformer ?pxf.
+    #?pxf c:IdentifiedObject.name ?pname.
+    #?tank c:IdentifiedObject.name ?tname.
+    #}
+    #ORDER BY ?pname ?tname ?rname ?wnum ?bus
+    #""" % mrid
 
-    results_reg = gridappsd_obj.query_data(query)
-    regulators = []
-    reg_name = []
-    results_obj = results_reg['data']
-    # print(results_obj)
-    return results_obj
+    #results_reg = gridappsd_obj.query_data(query)
+    #regulators = []
+    #reg_name = []
+    #results_obj = results_reg['data']
+    ## print(results_obj)
+    #return results_obj
 
 
 @pytest.mark.parametrize("sim_config_file", [
-    ("13-alarm.json"), 
-    #("123-alarm.json"), 
-    ("9500-alarm.json")])
+    ("13-alarm.json") , 
+    ("123-alarm.json"), 
+    ("9500-alarm.json")
+    ])
 def test_alarm_output(gridappsd_client, sim_config_file):
     global measurement_id
+    print('in test alarm output')
     sim_config_file = os.path.join(os.path.dirname(__file__), f"simulation_config_files/{sim_config_file}")
     assert os.path.exists(sim_config_file), f"File {sim_config_file} must exist to run simulation test"
+    print('confirmed test file exists')
+    cim_profile = 'cimhub_2023'
+    iec61970_301 = 8
 
+    cim = importlib.import_module(f'cimgraph.data_profile.{cim_profile}')
+    print('about to connect to bg')
+    # Blazegraph connection for running outside the container
+    params = ConnectionParameters(url='http://localhost:8889/bigdata/namespace/kb/sparql',
+                                  cim_profile=cim_profile,
+                                  iec61970_301=iec61970_301)
+    bg = BlazegraphConnection(params)
+    print('got bg connection')
     gapps = gridappsd_client
     # Allow proven to come up
     sleep(30)
@@ -107,39 +130,55 @@ def test_alarm_output(gridappsd_client, sim_config_file):
     with open(sim_config_file) as fp:
         LOGGER.info('Loading config')
         run_config = json.load(fp)
+        print('got run config')
         events = run_config["test_config"]["events"]
         switch_mrid1, switch_mrid2 = [], []
         # regulator_mrid1, regulator_mrid2 = [], []
         for i in range(len(events)):
+            print('in for')
             if "message" in events[i] and events[i]["message"]["forward_differences"][0]["attribute"] == "Switch.open":
                 switch_mrid1.append(events[i]["message"]["forward_differences"][0]["object"])
                 switch_mrid2.append(events[i]["message"]["reverse_differences"][0]["object"])
 
     model_mrid = run_config["power_system_config"]["Line_name"]
+    print('runnign model')
+    print(model_mrid)
     try:
+        print('about to get graph model')
+        feeder = cim.Feeder(mRID=model_mrid)
+        graph_model = FeederModel(connection=bg, container=feeder, distributed=False)
+        print('About to load cim model data')
+        cimUtils.get_all_data(graph_model)
+        print('Model loading complete')
 
         equipment_dict = {}
 
-        request1 = {
-            "modelId": model_mrid,
-            "requestType": "QUERY_OBJECT_DICT",
-            "resultFormat": "JSON",
-            "objectType": "LoadBreakSwitch"
-        }
+        #request1 = {
+        #    "modelId": model_mrid,
+        #    "requestType": "QUERY_OBJECT_DICT",
+        #    "resultFormat": "JSON",
+        #    "objectType": "LoadBreakSwitch"
+        #}
 
-        request2 = {
+        powertransformer_measurements_query = {
             "modelId": model_mrid,
             "requestType": "QUERY_OBJECT_MEASUREMENTS",
             "resultFormat": "JSON",
             "objectType": "PowerTransformer"
         }
 
-        response = gapps.get_response("goss.gridappsd.process.request.data.powergridmodel", request1, timeout=60)
+        #response = gapps.get_response("goss.gridappsd.process.request.data.powergridmodel", request1, timeout=60)
+        #Retreive list of Switch mrids
         switch_list = []
+        switches = graph_model.graph.get(cim.LoadBreakSwitch, {})
+        for switch in switches.values():
+            print('adding switch ',switch.mRID)
+            switch_list.append(switch.mRID)
+
         # print(response["data"])
-        for switch in response["data"]:
-            equipment_dict[switch["id"]] = switch
-            switch_list.append(switch['IdentifiedObject.mRID'])
+        #for switch in response["data"]:
+        #    equipment_dict[switch["id"]] = switch
+        #    switch_list.append(switch['IdentifiedObject.mRID'])
         # print("switch_list", switch_list)
 
         for i in range(min(3, len(switch_list))):
@@ -148,27 +187,62 @@ def test_alarm_output(gridappsd_client, sim_config_file):
             run_config["test_config"]["events"][i]["message"]["reverse_differences"][0]["object"] = switch_list[i]
 
         print("testing regulator")
-        regulator = get_reg_mrids(gapps, model_mrid)
-        value = regulator['results']['bindings'][0]['reg_id']['value']
-        terminal_id = regulator['results']['bindings'][0]['trmid']['value']
+        regs = {}
+        #regulator = get_reg_mrids(gapps, model_mrid)
+        tapchangers = graph_model.graph.get(cim.RatioTapChanger, {})
+        #print('Got tapchangers ',str(len(tapchangers.values())))
+        for pt in tapchangers.values():
+            regs[pt.name] = pt
+        #sorting by tapchanger names, select the first one
+        regulator_one = regs[sorted(regs.keys())[0]]
+        
+        # ?reg_id ?trmid ?rname ?pname ?tname ?bus
+        #value = regulator['results']['bindings'][0]['reg_id']['value']
+        value = regulator_one.mRID
+        #terminal_id = regulator['results']['bindings'][0]['trmid']['value']
+        terminal_id = regulator_one.TransformerEnd.Terminal.mRID
         print("value", value, terminal_id)
 
         for i in range(len(events)):
+            print('in for')
             if "message" in events[i] and events[i]["message"]["forward_differences"][0]["attribute"] == "TapChanger.step":
                 run_config["test_config"]["events"][i]["message"]["forward_differences"][0]["object"] = value
                 run_config["test_config"]["events"][i]["message"]["reverse_differences"][0]["object"] = value
             if "inputOutageList" in events[i]:
                 run_config["test_config"]["events"][i]["inputOutageList"][0]["objectMRID"] = value
-        response2 = gapps.get_response("goss.gridappsd.process.request.data.powergridmodel", request2, timeout=60)
-        for reg in response2["data"]:
+
+        print('after for loop')
+        #regulators = graph_model.graph.get(cim.PowerTransformer, {})
+        #for regulator in regulators.values():
+        #    print('adding regulator ',regulator.mRID)
+        #    if regulator.mRID == terminal_id:
+        #    #switch_list.append(switch.mRID)
+        #        measurement_id = reg['measid']
+        #        print('got measurement id ',measurement_id,' for terminal ',terminal_id)
+
+        measurments = gapps.get_response("goss.gridappsd.process.request.data.powergridmodel", powertransformer_measurements_query, timeout=60)
+        print('queried for measurements')
+        print(measurments.__class__)
+        for reg in json.loads(measurments["data"]):
+            print('reg')
+            print(reg)
             if reg['trmid'] == terminal_id:
                 measurement_id = reg['measid']
-                print(measurement_id, terminal_id)
+                print('found measurement match ',measurement_id, terminal_id)
+        print('after for measurments')
     except Exception as e:
-        message_str = "An error occurred while trying to translate the  message received" + str(e)
+        print('GOT ERROR')
+        message_str = "An error occurred while trying to translate the message received" + str(e)
+        LOGGER.error(message_str)
+        print(message_str)
+        sys.exit(1)
 
     LOGGER.info('Starting the simulation')
     LOGGER.info(f'Simulation start time {run_config["simulation_config"]["start_time"]}')
+
+    print('run_config')
+    print(json.dumps(run_config))
+    LOGGER.info(json.dumps(run_config))
     sim = Simulation(gapps, run_config)
     # print(sim._run_config)
     sim.start_simulation(timeout=300)
@@ -177,6 +251,8 @@ def test_alarm_output(gridappsd_client, sim_config_file):
     sim.add_oncomplete_callback(onfinishsimulation)
     LOGGER.info("Querying for alarm topic")
     alarms_topic = t.service_output_topic('gridappsd-alarms', sim.simulation_id)
+    LOGGER.info("Alarm Topic ")
+    LOGGER.info(alarms_topic)
     log_topic = t.simulation_output_topic(sim.simulation_id)
     # print(gapps.subscribe(log_topic, compare_ids(measurement_id)))
     gapps.subscribe(alarms_topic, compare_ids(measurement_id))
@@ -203,3 +279,4 @@ def test_comm_outage():
 def test_alarm_count():
     global alarm_count
     assert alarm_count > 2, f"Expecting 3 alarms received {alarm_count}"
+ 

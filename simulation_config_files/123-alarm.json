@@ -1,8 +1,8 @@
 {
   "power_system_config": {
-    "GeographicalRegion_name": "_24809814-4EC6-29D2-B509-7F8BFB646437",
-    "SubGeographicalRegion_name": "_1CD7D2EE-3C91-3248-5662-A43EFEFAC224",
-    "Line_name": "_C1C3E687-6FFD-C753-582B-632A27E28507"
+    "GeographicalRegion_name": "73C512BD-7249-4F50-50DA-D93849B89C43",
+    "SubGeographicalRegion_name": "1CD7D2EE-3C91-3248-5662-A43EFEFAC224",
+    "Line_name": "C1C3E687-6FFD-C753-582B-632A27E28507"
   },
 
   "application_config": {
@@ -16,7 +16,7 @@
     "simulator": "GridLAB-D",
     "timestep_frequency": 1000,
     "timestep_increment": 1000,
-    "run_realtime": false,
+    "run_realtime": true,
     "simulation_name": "ieee123",
     "power_flow_solver_method": "NR",
     "model_creation_config": {
@@ -36,14 +36,14 @@
                 "message": {
                     "forward_differences": [
                         {
-                            "object": "_792127B0-9B3E-43EC-9D23-FD46F5A2F20D",
+                            "object": "792127B0-9B3E-43EC-9D23-FD46F5A2F20D",
                             "attribute": "Switch.open",
                             "value": 1
                         }
                     ],
                     "reverse_differences": [
                         {
-                            "object": "_792127B0-9B3E-43EC-9D23-FD46F5A2F",
+                            "object": "792127B0-9B3E-43EC-9D23-FD46F5A2F",
                             "attribute": "Switch.open",
                             "value": 0
                         }
@@ -57,14 +57,14 @@
                 "message": {
                     "forward_differences": [
                         {
-                            "object": "_28CFA3B0-5D09-4154-BC5A-BD0C45E9530D",
+                            "object": "28CFA3B0-5D09-4154-BC5A-BD0C45E9530D",
                             "attribute": "Switch.open",
                             "value": 1
                         }
                     ],
                     "reverse_differences": [
                         {
-                            "object": "_28CFA3B0-5D09-4154-BC5A-BD0C45E9530D",
+                            "object": "28CFA3B0-5D09-4154-BC5A-BD0C45E9530D",
                             "attribute": "Switch.open",
                             "value": 0
                         }
@@ -78,14 +78,14 @@
                 "message": {
                     "forward_differences": [
                         {
-                            "object": "_B2C95152-D6F7-4702-9910-E2543FB9B4F7",
+                            "object": "B2C95152-D6F7-4702-9910-E2543FB9B4F7",
                             "attribute": "Switch.open",
                             "value": 1
                         }
                     ],
                     "reverse_differences": [
                         {
-                            "object": "_B2C95152-D6F7-4702-9910-E2543FB9B4F7",
+                            "object": "B2C95152-D6F7-4702-9910-E2543FB9B4F7",
                             "attribute": "Switch.open",
                             "value": 0
                         }
@@ -99,14 +99,14 @@
                 "message": {
                     "forward_differences": [
                         {
-                            "object": "_5D67EBEE-9158-4C56-9E39-12A9AC0D7",
+                            "object": "5D67EBEE-9158-4C56-9E39-12A9AC0D7",
                             "attribute": "TapChanger.step",
                             "value": 4
                         }
                     ],
                     "reverse_differences": [
                         {
-                            "object": "_5D67EBEE-9158-4C56-9E39-12A9AC0D7B8D",
+                            "object": "5D67EBEE-9158-4C56-9E39-12A9AC0D7B8D",
                             "attribute": "TapChanger.step",
                             "value": 10
                         }
@@ -120,11 +120,11 @@
                 "allInputOutage": false,
                 "allOutputOutage": false,
                 "event_type": "CommOutage",
-                "faultMRID": "_f52aa46c-ce43-4aa4-8888-c1f3e4b684ae",
+                "faultMRID": "f52aa46c-ce43-4aa4-8888-c1f3e4b684ae",
                 "inputOutageList": [
                     {
                         "attribute": "TapChanger.step",
-                        "objectMRID": "_5D67EBEE-9158-4C56-9E39-12A9AC0D7"
+                        "objectMRID": "5D67EBEE-9158-4C56-9E39-12A9AC0D7"
                     }
                 ],
                 "occuredDateTime": 1373814140,
@@ -135,14 +135,14 @@
                 "message": {
                     "forward_differences": [
                         {
-                            "object": "_5D67EBEE-9158-4C56-9E39-12A9AC0D7B8D",
+                            "object": "5D67EBEE-9158-4C56-9E39-12A9AC0D7B8D",
                             "attribute": "TapChanger.step",
                             "value": 10
                         }
                     ],
                     "reverse_differences": [
                         {
-                            "object": "_5D67EBEE-9158-4C56-9E39-12A9AC0D7B8",
+                            "object": "5D67EBEE-9158-4C56-9E39-12A9AC0D7B8",
                             "attribute": "TapChanger.step",
                             "value": 5
                         }

@@ -275,12 +275,12 @@ class CapacitorToggler(object):
     SELECT ?name ?basev ?bus1 ?bus2 ?open ?fdrid ?continuous ?breaking (group_concat(distinct ?phs;separator="\n") as ?phases) WHERE {
      ?s r:type c:LoadBreakSwitch.
     # feeder selection options - if all commented out, query matches all feeders
-    #VALUES ?fdrid {"_C1C3E687-6FFD-C753-582B-632A27E28507"}  # 123 bus
-    #VALUES ?fdrid {"_49AD8E07-3BF9-A4E2-CB8F-C3722F837B62"}  # 13 bus
-    #VALUES ?fdrid {"_5B816B93-7A5F-B64C-8460-47C17D6E4B0F"}  # 13 bus assets
-    VALUES ?fdrid {"_4F76A5F9-271D-9EB8-5E31-AA362D86F2C3"}  # 8500 node
-    #VALUES ?fdrid {"_67AB291F-DCCD-31B7-B499-338206B9828F"}  # J1
-    #VALUES ?fdrid {"_9CE150A8-8CC5-A0F9-B67E-BBD8C79D3095"}  # R2 12.47 3
+    #VALUES ?fdrid {"C1C3E687-6FFD-C753-582B-632A27E28507"}  # 123 bus
+    #VALUES ?fdrid {"49AD8E07-3BF9-A4E2-CB8F-C3722F837B62"}  # 13 bus
+    #VALUES ?fdrid {"5B816B93-7A5F-B64C-8460-47C17D6E4B0F"}  # 13 bus assets
+    VALUES ?fdrid {"4F76A5F9-271D-9EB8-5E31-AA362D86F2C3"}  # 8500 node
+    #VALUES ?fdrid {"67AB291F-DCCD-31B7-B499-338206B9828F"}  # J1
+    #VALUES ?fdrid {"9CE150A8-8CC5-A0F9-B67E-BBD8C79D3095"}  # R2 12.47 3
      ?s c:Equipment.EquipmentContainer ?fdr.
      ?fdr c:IdentifiedObject.mRID ?fdrid.
      ?s c:IdentifiedObject.name ?name.

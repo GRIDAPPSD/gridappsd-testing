@@ -76,7 +76,7 @@ def on_message(self, message):
 
 @pytest.mark.parametrize("sim_config_file, sim_result_file", [
     ("13-new.json", "13-node-sim.output"),
-    #("123-config.json", "123-simulation.output"),
+    ("123-config.json", "123-simulation.output"),
     ("9500-config.json", "9500-simulation.output")])
 def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
     global resume_msg
@@ -152,9 +152,12 @@ def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
         num_measurements_before_pause = 3
         while received_measurment_count < num_measurements_before_pause and sim._running_or_paused:
             LOGGER.info(f"Waiting for at least {num_measurements_before_pause} measurements"
-                        f"but have {received_measurment_count} time take {secs}s ")
+                        f"but have {received_measurment_count} time taken {secs}s ")
             secs += 1
             sleep(1)
+            if secs > 60:
+                LOGGER.info("Waited too long for measurements, breaking")
+                break
 
         LOGGER.debug("Pausing sim now")
         sim.pause()
@@ -165,11 +168,14 @@ def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
             LOGGER.info(f"PAUSED {paused_seconds}")
             paused_seconds += 1
 
-            if paused_seconds > 30:
+            if paused_seconds > 30 and received_measurment_count == num_measurements_before_pause:
                 LOGGER.info('Resuming simulation')
                 sim.resume()
-                LOGGER.info('Resumed simulation')
                 are_we_paused = False
+                LOGGER.info('breaking')
+                break
+            elif paused_seconds > 60:
+                LOGGER.info('Resuming simulation received, not matching expected')
                 break
             sleep(1)
 
@@ -178,13 +184,14 @@ def test_simulation_output(gridappsd_client, sim_config_file, sim_result_file):
         sleep(10)
         assert "resumed" in resume_msg, 'Resume command not called'
 
-        sim.run_loop()
+        if sim._running_or_paused and received_measurment_count == num_measurements_before_pause:
+            sim.run_loop()
         # are_simulation_results_matching(sim_expected_results_file, sim_actual_result_file)
 
 
 @pytest.mark.parametrize("sim_output_file, sim_result_file", [
     ("13-node-sim.output", "13-node-sim.output"),
-    #("123-simulation.output", "123-simulation.output"),
+    ("123-simulation.output", "123-simulation.output"),
     ("9500-simulation.output", "9500-simulation.output")])
 #@pytest.mark.xfail(strict=True)
 def test_are_simulation_results_matching(sim_output_file, sim_result_file):

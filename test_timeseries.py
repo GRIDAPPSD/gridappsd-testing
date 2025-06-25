@@ -46,10 +46,15 @@ def test_timeseries_output(gridappsd_client, sim_config_file, sim_result_file):
         sim_complete = True
         LOGGER.info('Simulation Complete')
 
+
+    simulation_start = int(time())
     with open(sim_config_file) as fp:
         LOGGER.info('Loading config')
         run_config = json.load(fp)
-        LOGGER.info(f'Simulation start time {run_config["simulation_config"]["start_time"]}')
+        simulation_start = run_config["simulation_config"]["start_time"]
+        simulation_start_str = str(simulation_start) 
+        LOGGER.info(f'Simulation start time {simulation_start_str}')
+
 
     sim = Simulation(gapps, run_config)
     LOGGER.info(f'Simulation id {sim.simulation_id}')
@@ -60,50 +65,97 @@ def test_timeseries_output(gridappsd_client, sim_config_file, sim_result_file):
     LOGGER.info('sim.add_onmeasurement_callback')
     sim.add_onmeasurement_callback(onmeasurement)
 
-    LOGGER.info('Starting the simulation')
-    sim.start_simulation()
 
+    print('About to query weather')
     with open("./simulation_config_files/weather_data.json", 'r') as g:
         LOGGER.info('Querying weather data from timeseries')
+        print('Querying weather data from timeseries')
         query1 = json.load(g)
         result_weather_data = gapps.get_response(t.TIMESERIES, query1, timeout=60)
         LOGGER.info('Weather data received ')
-
+        print('Weather data received ')
+        LOGGER.info(result_weather_data)
+        print(result_weather_data)
+        LOGGER.info(type(result_weather_data))
+        print(type(result_weather_data))
+        
+    LOGGER.info('Starting the simulation')
+    sim.start_simulation()
     sim.run_loop()
 
     with open("./simulation_config_files/timeseries_query.json", 'r') as f:
         query2 = json.load(f)
+        #simulation_end = int(time())
+        simulation_end = int(simulation_start)+25
+
         query2["queryFilter"]["simulation_id"] = sim.simulation_id
+        query2["queryFilter"]["starttime"] = simulation_start
+        query2["queryFilter"]["endtime"] = simulation_end       
         LOGGER.info('Querying simulation data from timeseries')
-        result_timeseries_query = gapps.get_response(t.TIMESERIES, query2, timeout=300)
-        LOGGER.info('Simulation data received for Timeseries API')
+        LOGGER.info(query2)
+        try:
+            result_timeseries_query = gapps.get_response(t.TIMESERIES, query2, timeout=600)
+            print('Time series query complete')
+            LOGGER.info('Simulation data received for Timeseries API')
+            LOGGER.info(result_timeseries_query)
+        except Exception as err:
+            LOGGER.info('Error in time series query')
+            LOGGER.info(err)
+
 
     with open("./simulation_config_files/sensor_query.json", 'r') as file:
+        simulation_end = int(simulation_start)+100000000
         sensor_query = json.load(file)
+        sensor_query["queryFilter"]["starttime"] = simulation_start
+        sensor_query["queryFilter"]["endtime"] = simulation_end       
         sensor_query["queryFilter"]["simulation_id"] = sim.simulation_id
         LOGGER.info('Querying GridAPPS-D sensor simulator data from timeseries')
-        result_sensor_query = gapps.get_response(t.TIMESERIES, sensor_query, timeout=300)
+        LOGGER.info(sensor_query)
+        result_sensor_query = gapps.get_response(t.TIMESERIES, sensor_query, timeout=600)
         LOGGER.info('Simulation data received for sensor simulator')
-
+        LOGGER.info(result_sensor_query)
 
 def test_weather_api():
     global result_weather_data
+
+    LOGGER.info('Weather data received in test ')
+    LOGGER.info(result_weather_data)
+    LOGGER.info(type(result_weather_data))
+
+    if type(result_weather_data) == str:
+        LOGGER.info('Weather data is a string, parsing')
+        result_weather_data = json.loads(result_weather_data)
+    result_weather_data_obj = {}    
+    if "data" in result_weather_data:
+        result_weather_data_obj = result_weather_data["data"]
+        if type(result_weather_data_obj) == str:
+            result_weather_data_obj = json.loads(result_weather_data_obj)
     try:
-        assert "Diffuse" in result_weather_data["data"][0], \
-            f'Weather data query does not have expected output {result_weather_data["data"][0]}'
+         assert "Diffuse" in result_weather_data_obj[0], \
+            f'Weather data query does not have expected output {result_weather_data_obj[0]}'
     except KeyError:
-        assert (result_weather_data["data"] != {}), \
+        assert (result_weather_data_obj != {}), \
             f'Weather data query does not have expected output {result_weather_data}'
     LOGGER.info('Weather data query has expected output')
 
 
 def test_timeseries_simulation_api():
     global result_timeseries_query
+    LOGGER.info('Timeseries data received in test ')
+    if type(result_timeseries_query) == str:
+        result_timeseries_query = json.loads(result_timeseries_query)
+
+    result_timeseries_query_obj = {}    
+    if "data" in result_timeseries_query:
+        result_timeseries_query_obj = result_timeseries_query["data"]
+        if type(result_timeseries_query_obj) == str:
+            result_timeseries_query_obj = json.loads(result_timeseries_query_obj)
+
     try:
-        assert "hasSimulationMessageType" in result_timeseries_query["data"][0], \
-            f'Simulation data query does not have expected output {result_timeseries_query["data"][0]}'
+        assert "hasSimulationMessageType" in result_timeseries_query_obj[0], \
+            f'Simulation data query does not have expected output {result_timeseries_query_obj[0]}'
     except KeyError:
-        assert (result_timeseries_query["data"] != {}), \
+        assert (result_timeseries_query_obj != {}), \
             f'Simulation data query does not have expected output {result_timeseries_query}'
     LOGGER.info('Simulation data query has expected output')
 
@@ -111,10 +163,17 @@ def test_timeseries_simulation_api():
 @pytest.mark.xfail(strict=True, reason="sensor simulator requires updates for gridappsd-python")
 def test_sensor_simulator_api():
     global result_sensor_query
+    if type(result_sensor_query) == str:
+        result_sensor_query = json.loads(result_sensor_query)
+    result_timeseries_query_obj = {}    
+    if "data" in result_timeseries_query:
+        result_timeseries_query_obj = result_timeseries_query["data"]
+        if type(result_timeseries_query_obj) == str:
+            result_timeseries_query_obj = json.loads(result_timeseries_query_obj)
     try:
         assert "hasSimulationMessageType" in result_sensor_query["data"][0], \
-            f'Sensor simulator data does not have expected output {result_sensor_query["data"][0]}'
+            f'Sensor simulator data does not have expected output {result_timeseries_query_obj[0]}'
     except KeyError:
-        assert (result_sensor_query["data"] != {}), \
+        assert (result_timeseries_query_obj != {}), \
             f'Sensor simulator data does not have expected output {result_sensor_query}'
     LOGGER.info('Query response received for  GridAPPS-D sensor simulator data from timeseries')

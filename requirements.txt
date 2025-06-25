@@ -1,6 +1,7 @@
 # enter requirements that aren't related to connecting to the messagebus here
 stomp.py==6.0.0
-gridappsd-python
+gridappsd-python==2025.3.1a5
+gridappsd-field-bus==2025.3.1a5
 pytest
 docker
 mock
@@ -8,3 +9,5 @@ pytest-html
 pytest-timeout
 dictdiffer 
 deepdiff
+cim-graph==0.2.2a4
+ 
