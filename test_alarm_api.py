@@ -6,6 +6,7 @@ import yaml
 from time import sleep, time
 import sys
 import pytest
+import traceback
 
 from gridappsd import GridAPPSD
 from gridappsd.simulation import Simulation
@@ -108,13 +109,15 @@ def test_alarm_output(gridappsd_client, sim_config_file):
     iec61970_301 = 8
 
     cim = importlib.import_module(f'cimgraph.data_profile.{cim_profile}')
-    print('about to connect to bg')
     # Blazegraph connection for running outside the container
-    params = ConnectionParameters(url='http://localhost:8889/bigdata/namespace/kb/sparql',
-                                  cim_profile=cim_profile,
-                                  iec61970_301=iec61970_301)
-    bg = BlazegraphConnection(params)
-    print('got bg connection')
+    os.environ['CIMG_CIM_PROFILE'] = cim_profile
+    os.environ['CIMG_IEC61970_301'] = str(iec61970_301)
+    os.environ['CIMG_URL'] = 'http://localhost:8889/bigdata/namespace/kb/sparql'
+    os.environ['CIMG_USE_UNITS'] = 'false'
+    os.environ['CIMG_NAMESPACE'] = 'http://iec.ch/TC57/CIM100#'
+    os.environ['CIMG_VALIDATION_LOG_LEVEL'] = 'DEBUG'
+
+    bg = BlazegraphConnection()
     gapps = gridappsd_client
     # Allow proven to come up
     sleep(30)
@@ -234,6 +237,7 @@ def test_alarm_output(gridappsd_client, sim_config_file):
         print('GOT ERROR')
         message_str = "An error occurred while trying to translate the message received" + str(e)
         LOGGER.error(message_str)
+        traceback.print_exc()
         print(message_str)
         sys.exit(1)
 
