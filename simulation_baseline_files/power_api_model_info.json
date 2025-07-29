@@ -32,6 +32,16 @@
                 "regionId": "73C512BD-7249-4F50-50DA-D93849B89C43"
             },
             {
+                "modelName": "ieee123_apps",
+                "modelId": "F49D1288-9EC6-47DB-8769-57E2B6EDB124",
+                "stationName": "subname",
+                "stationId": "70DC1806-B932-41F1-8B4E-B2C5D089DD20",
+                "subRegionName": "subregion",
+                "subRegionId": "45E519CB-D5AD-4038-8794-F73E214E53F6",
+                "regionName": "region",
+                "regionId": "B1EA697B-F596-44D6-A7A7-A12AF6B09822"
+            },
+            {
                 "modelName": "ieee123pv",
                 "modelId": "E407CBB6-8C8D-9BC9-589C-AB83FBF0826D",
                 "stationName": "IEEE123",

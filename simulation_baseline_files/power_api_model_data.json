@@ -40,6 +40,20 @@
                 {
                     "feeder_name": {
                         "type": "literal",
+                        "value": "ieee123_apps"
+                    },
+                    "subregion_name": {
+                        "type": "literal",
+                        "value": "subregion"
+                    },
+                    "region_name": {
+                        "type": "literal",
+                        "value": "region"
+                    }
+                },
+                {
+                    "feeder_name": {
+                        "type": "literal",
                         "value": "ieee13nodeckt"
                     },
                     "subregion_name": {
